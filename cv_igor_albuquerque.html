@@ -1,385 +1,485 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8"/>
-<title>Igor Costa Lins de Albuquerque — CV</title>
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8" />
+  <title>Igor Costa Lins de Albuquerque — CV</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  :root {
-    --navy:   #0F2D57;
-    --blue:   #1A4A8A;
-    --text:   #1a1a2e;
-    --gray:   #4a5569;
-    --lgray:  #94a3b8;
-    --divider:#c8d8ee;
-    --bg:     #ffffff;
-  }
+    :root {
+      --navy: #0F2D57;
+      --blue: #1A4A8A;
+      --text: #1a1a2e;
+      --gray: #4a5569;
+      --lgray: #94a3b8;
+      --divider: #c8d8ee;
+      --bg: #ffffff;
+    }
 
-  html, body {
-    width: 210mm;
-    background: #f0f4f8;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
+    html,
+    body {
+      width: 210mm;
+      background: #f0f4f8;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
 
-  .page {
-    width: 210mm;
-    min-height: 297mm;
-    background: var(--bg);
-    margin: 0 auto;
-    padding: 14mm 14mm 14mm 14mm; /* Reduzido levemente o padding geral */
-  }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--bg);
+      margin: 0 auto;
+      padding: 14mm 14mm 14mm 14mm;
+    }
 
-  /* ── HEADER ── */
-  .header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-end; 
-    margin-bottom: 10px; /* Era 12px */
-  }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 10px;
+    }
 
-  .header-main { flex: 1; }
+    .header-main {
+      flex: 1;
+    }
 
-  .header-name {
-    font-size: 26pt;
-    font-weight: 800;
-    color: var(--navy);
-    letter-spacing: -0.5px;
-    line-height: 1;
-    margin-bottom: 6px; /* Era 8px */
-  }
+    .header-name {
+      font-size: 26pt;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
 
-  .header-role {
-    font-size: 8.5pt;
-    color: var(--blue);
-    font-weight: 600;
-    letter-spacing: 0.2px;
-  }
+    .header-role {
+      font-size: 8.5pt;
+      color: var(--blue);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
 
-  .header-role span {
-    color: var(--lgray);
-    font-weight: 400;
-    margin: 0 4px;
-  }
+    .header-role span {
+      color: var(--lgray);
+      font-weight: 400;
+      margin: 0 4px;
+    }
 
-  .header-contacts { 
-    text-align: right; 
-    font-size: 7.5pt; 
-    color: var(--gray); 
-    line-height: 1.4; /* Era 1.5 */
-  }
+    .header-contacts {
+      text-align: right;
+      font-size: 7.5pt;
+      color: var(--gray);
+      line-height: 1.4;
+    }
 
-  .header-contacts a { 
-    color: var(--blue); 
-    text-decoration: none; 
-  }
-  
-  .header-contacts a:hover { 
-    text-decoration: underline; 
-  }
+    .header-contacts a {
+      color: var(--blue);
+      text-decoration: none;
+    }
 
-  .portfolio-link {
-    font-weight: 700;
-    color: var(--navy) !important;
-  }
+    .header-contacts a:hover {
+      text-decoration: underline;
+    }
 
-  .divider-thick {
-    border: none;
-    border-top: 2px solid var(--navy);
-    margin: 8px 0 10px 0; /* Era 10px 0 14px 0 */
-  }
+    .portfolio-link {
+      font-weight: 700;
+      color: var(--navy) !important;
+    }
 
-  /* ── TWO COLUMN ── */
-  .body {
-    display: flex;
-    gap: 14px;
-  }
+    .divider-thick {
+      border: none;
+      border-top: 2px solid var(--navy);
+      margin: 8px 0 10px 0;
+    }
 
-  .col-left  { flex: 0 0 118mm; width: 118mm; }
-  .col-right { flex: 1; min-width: 0; }
+    .body {
+      display: flex;
+      gap: 14px;
+    }
 
-  /* ── SECTION TITLE ── */
-  .sec-title {
-    font-size: 7pt;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border-bottom: 1.5px solid var(--navy);
-    padding-bottom: 2px;
-    margin-bottom: 5px; /* Era 6px */
-    margin-top: 24px; /* Era 34px - Grande redução aqui para salvar espaço */
-  }
-  .sec-title:first-child { margin-top: 0; }
+    .col-left {
+      flex: 0 0 118mm;
+      width: 118mm;
+    }
 
-  /* ── JOB BLOCK ── */
-  .job { margin-bottom: 22px; } /* Era 28px */
-  .job:last-child { margin-bottom: 0; }
-  
-  /* Reduz espaço vertical apenas nos projetos em destaque */
-  .job-project { margin-bottom: 12px; } /* Era 14px */
+    .col-right {
+      flex: 1;
+      min-width: 0;
+    }
 
-  .job-header { margin-bottom: 4px; line-height: 1.45; } /* Ajuste fino */
+    .sec-title {
+      font-size: 7pt;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid var(--navy);
+      padding-bottom: 2px;
+      margin-bottom: 5px;
+      margin-top: 24px;
+    }
 
-  .job-role {
-    font-size: 8.5pt;
-    font-weight: 700;
-    color: var(--text);
-  }
+    .sec-title:first-child {
+      margin-top: 0;
+    }
 
-  .job-sep { color: var(--lgray); font-size: 8pt; margin: 0 3px; }
+    .job {
+      margin-bottom: 22px;
+    }
 
-  .job-company {
-    font-size: 8pt;
-    font-weight: 500;
-    color: var(--blue);
-  }
+    .job:last-child {
+      margin-bottom: 0;
+    }
 
-  .job-period {
-    font-size: 7.5pt;
-    color: var(--lgray);
-    font-style: italic;
-  }
+    .job-project {
+      margin-bottom: 12px;
+    }
 
-  /* ── BULLETS ── */
-  ul.bullets {
-    list-style: none;
-    padding: 0;
-    margin: 4px 0 0 0;
-  }
-  ul.bullets li {
-    font-size: 7.8pt;
-    color: var(--gray);
-    line-height: 1.45; /* Era 1.5 */
-    padding-left: 10px;
-    position: relative;
-    margin-bottom: 1px; /* Era 2px */
-  }
-  ul.bullets li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--navy);
-    font-size: 7pt;
-    top: 1px;
-  }
-  ul.bullets li b { color: var(--text); font-weight: 600; }
+    .job-header {
+      margin-bottom: 4px;
+      line-height: 1.45;
+    }
 
-  /* ── RIGHT COL ── */
-  .skill-row {
-    font-size: 7.8pt;
-    color: var(--gray);
-    margin-bottom: 3px;
-    line-height: 1.35; /* Era 1.4 */
-  }
-  .skill-row b { color: var(--navy); font-weight: 600; }
+    .job-role {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: var(--text);
+    }
 
-  .edu-title {
-    font-size: 8.5pt;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 1px;
-    margin-top: 5px;
-  }
-  .edu-sub {
-    font-size: 7.8pt;
-    color: var(--gray);
-    margin-bottom: 5px;
-  }
+    .job-sep {
+      color: var(--lgray);
+      font-size: 8pt;
+      margin: 0 3px;
+    }
 
-  .lang-row {
-    font-size: 8pt;
-    color: var(--gray);
-    margin-bottom: 4px;
-  }
-  .lang-row b { color: var(--text); font-weight: 600; }
+    .job-company {
+      font-size: 8pt;
+      font-weight: 500;
+      color: var(--blue);
+    }
 
-  .pub-title {
-    font-size: 8pt;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 2px;
-    margin-top: 8px; /* Era 10px */
-    line-height: 1.25;
-  }
-  .pub-meta {
-    font-size: 7.2pt;
-    color: var(--lgray);
-    font-style: italic;
-    margin-bottom: 6px;
-    line-height: 1.35;
-  }
+    .job-period {
+      font-size: 7.5pt;
+      color: var(--lgray);
+      font-style: italic;
+    }
 
-  /* ── SOBRE ── */
-  .sobre {
-    font-size: 7.8pt;
-    color: var(--gray);
-    line-height: 1.55; /* Era 1.65 - Salva algumas linhas de altura */
-  }
-  .sobre b { color: var(--text); font-weight: 600; }
+    ul.bullets {
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 0 0;
+    }
 
-  /* ── PRINT ── */
-  @media print {
-    html, body { background: white; width: 210mm; height: 297mm; }
-    /* Padding levemente menor na impressão para garantir que caiba */
-    .page { margin: 0; box-shadow: none; padding: 10mm 12mm 8mm 12mm; }
-    @page { size: A4; margin: 0; }
-  }
-</style>
+    ul.bullets li {
+      font-size: 7.8pt;
+      color: var(--gray);
+      line-height: 1.45;
+      padding-left: 10px;
+      position: relative;
+      margin-bottom: 1px;
+    }
+
+    ul.bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--navy);
+      font-size: 7pt;
+      top: 1px;
+    }
+
+    ul.bullets li b {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .skill-row {
+      font-size: 7.8pt;
+      color: var(--gray);
+      margin-bottom: 3px;
+      line-height: 1.35;
+    }
+
+    .skill-row b {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .edu-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1px;
+      margin-top: 5px;
+    }
+
+    .edu-sub {
+      font-size: 7.8pt;
+      color: var(--gray);
+      margin-bottom: 5px;
+    }
+
+    .lang-row {
+      font-size: 8pt;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .lang-row b {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .pub-title {
+      font-size: 8pt;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+      margin-top: 8px;
+      line-height: 1.25;
+    }
+
+    .pub-meta {
+      font-size: 7.2pt;
+      color: var(--lgray);
+      font-style: italic;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .sobre {
+      font-size: 7.8pt;
+      color: var(--gray);
+      line-height: 1.55;
+    }
+
+    .sobre b {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    @media print {
+
+      html,
+      body {
+        background: white;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+        padding: 10mm 12mm 8mm 12mm;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    }
+  </style>
 </head>
-<body>
-<div class="page">
 
-  <div class="header">
-    <div class="header-main">
-      <div class="header-name">Igor Costa Lins de Albuquerque</div>
-      <div class="header-role">Desenvolvedor Fullstack <span>|</span> JavaScript · TypeScript · React · Next.js · NestJS · Node.js</div>
+<body>
+  <div class="page">
+
+    <div class="header">
+      <div class="header-main">
+        <div class="header-name">Igor Costa Lins de Albuquerque</div>
+        <div class="header-role">Desenvolvedor Fullstack <span>|</span> JavaScript · TypeScript · React · Next.js ·
+          NestJS · Node.js</div>
+      </div>
+      <div class="header-contacts">
+        <div>igorcostalins2005@gmail.com</div>
+        <div><a href="https://github.com/igoralbuquerque12">github.com/igoralbuquerque12</a></div>
+        <div><a href="https://linkedin.com/in/igor-albuquerque-30b751304">linkedin.com/in/igor-albuquerque</a></div>
+        <div><a href="https://igoralbuquerque.site/" class="portfolio-link">Acessar Portfólio ↗</a></div>
+        <div style="color: var(--lgray); margin-top: 2px;">Montes Claros, MG — Brasil</div>
+      </div>
     </div>
-    <div class="header-contacts">
-      <div>igorcostalins2005@gmail.com</div>
-      <div><a href="https://github.com/igoralbuquerque12">github.com/igoralbuquerque12</a></div>
-      <div><a href="https://linkedin.com/in/igor-albuquerque-30b751304">linkedin.com/in/igor-albuquerque</a></div>
-      <div><a href="#" class="portfolio-link">Acessar Portfólio ↗</a></div>
-      <div style="color: var(--lgray); margin-top: 2px;">Montes Claros, MG — Brasil</div>
+
+    <hr class="divider-thick" />
+
+    <div class="body">
+
+      <div class="col-left">
+
+        <div class="sec-title">Experiência Profissional</div>
+
+        <div class="job">
+          <div class="job-header">
+            <span class="job-role">Desenvolvedor de Software Júnior</span><span class="job-sep">·</span><span
+              class="job-company">Nocorp (Software House)</span><span class="job-sep">–</span><span
+              class="job-period">Jun 2025 – Presente</span>
+          </div>
+          <ul class="bullets">
+            <li>Sistema de gestão de concessionárias <b>multi-tenant</b> com regras de negócio complexas — <b>React +
+                Vite, NestJS, PostgreSQL</b></li>
+            <li>Sistema de gestão de RH com <b>arquitetura DDD</b> e comunicação via <b>tRPC</b> — Next.js, Supabase
+            </li>
+            <li>Features para e-commerce internacional em <b>JavaScript/TypeScript</b></li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <span class="job-role">Desenvolvedor Fullstack Freelance</span><span class="job-sep">·</span><span
+              class="job-company">Acelera Hub</span><span class="job-sep">–</span><span class="job-period">Mai 2024 –
+              Nov 2024</span>
+          </div>
+          <ul class="bullets">
+            <li><b>PixelPhone:</b> plataforma de gestão de ligações com <b>transcrição automática via IA</b> (OpenAI) e
+              dashboards por recepcionista</li>
+            <li>Score de atendimento personalizável, metas semanais e <b>recomendações geradas por IA</b></li>
+            <li>Filas <b>BullMQ</b> para auditoria assíncrona; controle de <b>race conditions</b> em saldo de
+              transcrições</li>
+            <li>Stack: <b>Next.js, PostgreSQL, Prisma, Docker, CI/CD</b> + API de telefonia e pagamentos</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <span class="job-role">Estagiário — Pesquisa &amp; Desenvolvimento</span><span class="job-sep">·</span><span
+              class="job-company">Lab. de Inteligência Comp. Aplicada · UNIMONTES</span><span
+              class="job-sep">–</span><span class="job-period">Jan 2024 – Mai 2025</span>
+          </div>
+          <ul class="bullets">
+            <li>Análise de dados e classificação com <b>ML / Deep Learning</b> (TensorFlow, Pandas, NumPy) — 2 artigos
+              publicados</li>
+            <li>Backend de sistema de gestão de eventos acadêmicos — <b>Python, Django REST Framework, PostgreSQL</b>
+            </li>
+            <li>Plataforma web de biodigestor indiano com persistência local em JavaScript</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <span class="job-role">Bolsista de Iniciação Científica</span><span class="job-sep">·</span><span
+              class="job-company">UNIMONTES</span><span class="job-sep">–</span><span class="job-period">Jul 2023 – Dez
+              2023</span>
+          </div>
+          <ul class="bullets">
+            <li>Desenvolvimento de sites institucionais</li>
+          </ul>
+        </div>
+
+        <div class="sec-title" style="margin-top:9px;">Projetos de Destaque</div>
+
+        <div class="job job-project">
+          <div class="job-header">
+            <span class="job-role">PixelPhone + Webphone</span>
+            <span class="job-sep">·</span>
+            <span class="job-company">SaaS Comercializado (Projeto Freelance)</span>
+          </div>
+          <ul class="bullets">
+            <li>Plataforma de gestão de telefonia desenvolvida e vendida em conjunto com o <b>Webphone</b> (extensão de
+              navegador para ligações em <b>React/JS</b>)</li>
+            <li>Dashboards de atendimento com <b>transcrição e recomendações via IA</b> (OpenAI), auditoria via
+              <b>BullMQ</b> e stack em <b>Next.js, PostgreSQL e Prisma</b></li>
+          </ul>
+        </div>
+
+        <div class="job job-project">
+          <div class="job-header">
+            <span class="job-role">Fala Comigo</span>
+            <span class="job-sep">·</span>
+            <a href="https://app.falacomigo.space/" class="job-company">Plataforma Pública</a>
+          </div>
+          <ul class="bullets">
+            <li><b>WebSockets</b> para chat em tempo real; IA <b>(Groq)</b> corrige e traduz cada mensagem
+              instantaneamente</li>
+            <li><b>BullMQ + Redis</b> para salvamento assíncrono; <b>React Query</b> para cache no frontend — NestJS,
+              MongoDB, Prisma</li>
+          </ul>
+        </div>
+
+        <div class="job job-project">
+          <div class="job-header">
+            <span class="job-role">vibe-git</span><span class="job-sep">·</span><span class="job-company">Biblioteca
+              open source — publicada no npm</span><span class="job-sep">–</span><a
+              href="https://github.com/igoralbuquerque12/vibe-git"
+              style="color:#1A4A8A; font-size:7.5pt; font-style:italic;">github ↗</a>
+          </div>
+          <ul class="bullets">
+            <li>CLI que automatiza <b>commits semânticos</b> e PRs com IA (<b>OpenAI / Gemini</b>), reduzindo processo
+              de 15 min para &lt;60s</li>
+            <li>Gerencia múltiplas tasks simultâneas, separando e direcionando cada commit corretamente</li>
+          </ul>
+        </div>
+
+        <div class="job job-project">
+          <div class="job-header">
+            <span class="job-role">MovieWish</span><span class="job-sep">·</span><span class="job-company">App Mobile —
+              código-fonte público</span><span class="job-sep">–</span><a
+              href="https://github.com/igoralbuquerque12/movie-wish"
+              style="color:#1A4A8A; font-size:7.5pt; font-style:italic;">github ↗</a>
+          </div>
+          <ul class="bullets">
+            <li>App para descoberta e organização de watchlists de filmes com <b>navegação contínua</b> por gêneros
+              sugeridos</li>
+            <li>Integração de catálogo via <b>API TMDB</b>; frontend responsivo em <b>Flutter</b> com backend robusto em
+              <b>NestJS e PostgreSQL</b></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="col-right">
+
+        <div class=sec-title>Sobre</div>
+        <p class=sobre>Desenvolvedor fullstack com experiência em sistemas web de ponta a ponta. Atuo desde a modelagem
+          de banco de dados e arquitetura de APIs até interfaces focadas em performance. Tenho background em <b>pesquisa
+            aplicada com IA e dados</b>, desenvolvimento com <b>regras de negócio complexas</b> e integração de serviços
+          externos. Inicio na programação em 2023 e desde então venho construindo projetos reais em produção.</p>
+
+        <div class="sec-title">Stack Técnica</div>
+
+        <div class="skill-row"><b>Frontend:</b> React · Next.js · TypeScript · JavaScript · Vite · React Query ·
+          Tailwind CSS · Flutter</div>
+        <div class="skill-row"><b>Backend:</b> NestJS · Node.js · Python · Django REST Framework · REST API · WebSockets
+          · tRPC</div>
+        <div class="skill-row"><b>Banco de Dados:</b> PostgreSQL · MongoDB · Prisma · Mongoose · Supabase</div>
+        <div class="skill-row"><b>Infraestrutura:</b> Docker · CI/CD · BullMQ · Redis · RabbitMQ · Cronjobs</div>
+        <div class="skill-row"><b>Qualidade & Observabilidade:</b> Testes unitários · Grafana · Prometheus · k6 · Testes
+          de carga · Logs estruturados</div>
+        <div class="skill-row"><b>Arquitetura:</b> DDD · Multi-tenant · Event-driven · Race conditions</div>
+
+        <div class="skill-row"><b>IA &amp; Dados:</b> OpenAI API · Groq · Gemini · TensorFlow · Pandas · NumPy</div>
+
+        <div class="sec-title">Formação</div>
+
+        <div class="edu-title">Bacharelado em Sistemas de Informação</div>
+        <div class="edu-sub">UNIMONTES &nbsp;·&nbsp; 2023 – 2026 (em conclusão)</div>
+        <ul class="bullets">
+          <li>Iniciação científica com publicação de 2 artigos em conferências nacionais</li>
+          <li>Laboratório de pesquisa aplicada em IA e desenvolvimento de sistemas</li>
+        </ul>
+
+        <div class="sec-title">Idiomas</div>
+
+        <div class="lang-row"><b>Português</b> — Nativo</div>
+        <div class="lang-row"><b>Inglês</b> — Avançado</div>
+
+        <div class="sec-title">Publicações</div>
+
+        <div class="pub-title">Redução de dimensionalidade de um teste de adição à internet</div>
+        <div class="pub-meta">XXVII Encontro Nacional de Modelagem Computacional · Algoritmo Genético · Otimização</div>
+
+        <div class="pub-title">Avaliação de técnicas de IA na classificação de indivíduos diabéticos e não diabéticos
+        </div>
+        <div class="pub-meta">2º Congresso de Educação e Inovação · Machine Learning · Saúde · Classificação</div>
+
+        <div class="pub-title" style="margin-top:4px; color:#4a5569; font-weight:500;">Colaboração voluntária — TV Boxes
+          como microcomputadores</div>
+        <div class="pub-meta">Projeto de pesquisa · UNIMONTES · Inclusão Digital</div>
+
+      </div>
     </div>
   </div>
+</body>
 
-  <hr class="divider-thick"/>
-
-  <div class="body">
-
-    <div class="col-left">
-
-      <div class="sec-title">Experiência Profissional</div>
-
-      <div class="job">
-        <div class="job-header">
-          <span class="job-role">Desenvolvedor de Software Júnior</span><span class="job-sep">·</span><span class="job-company">Nocorp (Software House)</span><span class="job-sep">–</span><span class="job-period">Fev 2025 – Presente</span>
-        </div>
-        <ul class="bullets">
-          <li>Sistema de gestão de concessionárias <b>multi-tenant</b> com regras de negócio complexas — <b>React + Vite, NestJS, PostgreSQL</b></li>
-          <li>Sistema de gestão de RH com <b>arquitetura DDD</b> e comunicação via <b>tRPC</b> — Next.js, Supabase</li>
-          <li>Features para e-commerce internacional em <b>JavaScript/TypeScript</b></li>
-        </ul>
-      </div>
-
-      <div class="job">
-        <div class="job-header">
-          <span class="job-role">Desenvolvedor Fullstack Freelance</span><span class="job-sep">·</span><span class="job-company">Acelera Hub</span><span class="job-sep">–</span><span class="job-period">Mai 2024 – Nov 2024</span>
-        </div>
-        <ul class="bullets">
-          <li><b>PixelPhone:</b> plataforma de gestão de ligações com <b>transcrição automática via IA</b> (OpenAI) e dashboards por recepcionista</li>
-          <li>Score de atendimento personalizável, metas semanais e <b>recomendações geradas por IA</b></li>
-          <li>Filas <b>BullMQ</b> para auditoria assíncrona; controle de <b>race conditions</b> em saldo de transcrições</li>
-          <li>Stack: <b>Next.js, PostgreSQL, Prisma, Docker, CI/CD</b> + API de telefonia e pagamentos</li>
-        </ul>
-      </div>
-
-      <div class="job">
-        <div class="job-header">
-          <span class="job-role">Estagiário — Pesquisa &amp; Desenvolvimento</span><span class="job-sep">·</span><span class="job-company">Lab. Computação Aplicada · UNIMONTES</span><span class="job-sep">–</span><span class="job-period">Jan 2024 – Mai 2025</span>
-        </div>
-        <ul class="bullets">
-          <li>Análise de dados e classificação com <b>ML / Deep Learning</b> (TensorFlow, Pandas, NumPy) — 2 artigos publicados</li>
-          <li>Backend de sistema de gestão de eventos acadêmicos — <b>Python, Django REST Framework, PostgreSQL</b></li>
-          <li>Plataforma web de biodigestor indiano com persistência local em JavaScript</li>
-        </ul>
-      </div>
-
-      <div class="job">
-        <div class="job-header">
-          <span class="job-role">Bolsista de Iniciação Científica</span><span class="job-sep">·</span><span class="job-company">UNIMONTES</span><span class="job-sep">–</span><span class="job-period">Jul 2023 – Dez 2023</span>
-        </div>
-        <ul class="bullets">
-          <li>Desenvolvimento web com WordPress em projeto de pesquisa universitária</li>
-        </ul>
-      </div>
-
-      <div class="sec-title" style="margin-top:9px;">Projetos de Destaque</div>
-
-      <div class="job job-project">
-        <div class="job-header">
-          <span class="job-role">PixelPhone + Webphone</span>
-          <span class="job-sep">·</span>
-          <span class="job-company">SaaS Comercializado (Projeto Freelance)</span>
-        </div>
-        <ul class="bullets">
-          <li>Plataforma de gestão de telefonia desenvolvida e vendida em conjunto com o <b>Webphone</b> (extensão de navegador para ligações em <b>React/JS</b>)</li>
-          <li>Dashboards de atendimento com <b>transcrição e recomendações via IA</b> (OpenAI), auditoria via <b>BullMQ</b> e stack em <b>Next.js, PostgreSQL e Prisma</b></li>
-        </ul>
-      </div>
-
-      <div class="job job-project">
-        <div class="job-header">
-          <span class="job-role">Fala Comigo</span>
-          <span class="job-sep">·</span>
-          <span class="job-company">Plataforma SaaS — disponível publicamente</span>
-        </div>
-        <ul class="bullets">
-          <li><b>WebSockets</b> para chat em tempo real; IA <b>(Groq)</b> corrige e traduz cada mensagem instantaneamente</li>
-          <li><b>BullMQ + Redis</b> para salvamento assíncrono; <b>React Query</b> para cache no frontend — NestJS, MongoDB, Prisma</li>
-        </ul>
-      </div>
-
-      <div class="job job-project">
-        <div class="job-header">
-          <span class="job-role">vibe-git</span><span class="job-sep">·</span><span class="job-company">Biblioteca open source — publicada no npm</span><span class="job-sep">–</span><a href="https://github.com/igoralbuquerque12/vibe-git" style="color:#1A4A8A; font-size:7.5pt; font-style:italic;">github ↗</a>
-        </div>
-        <ul class="bullets">
-          <li>CLI que automatiza <b>commits semânticos</b> e PRs com IA (<b>OpenAI / Gemini</b>), reduzindo processo de 15 min para &lt;60s</li>
-          <li>Gerencia múltiplas tasks simultâneas, separando e direcionando cada commit corretamente</li>
-        </ul>
-      </div>
-
-      <div class="job job-project">
-        <div class="job-header">
-          <span class="job-role">MovieWish</span><span class="job-sep">·</span><span class="job-company">App Mobile — código-fonte público</span><span class="job-sep">–</span><a href="https://github.com/igoralbuquerque12" style="color:#1A4A8A; font-size:7.5pt; font-style:italic;">github ↗</a>
-        </div>
-        <ul class="bullets">
-          <li>App para descoberta e organização de watchlists de filmes com <b>navegação contínua</b> por gêneros sugeridos</li>
-          <li>Integração de catálogo via <b>API TMDB</b>; frontend responsivo em <b>Flutter</b> com backend robusto em <b>NestJS e PostgreSQL</b></li>
-        </ul>
-      </div>
-
-    </div><div class="col-right">
-
-      <div class=sec-title>Sobre</div>
-      <p class=sobre>Desenvolvedor fullstack com experiência em sistemas web de ponta a ponta. Atuo desde a modelagem de banco de dados e arquitetura de APIs até interfaces focadas em performance. Tenho background em <b>pesquisa aplicada com IA e dados</b>, desenvolvimento com <b>regras de negócio complexas</b> e integração de serviços externos. Inicio na programação em 2023 e desde então venho construindo projetos reais em produção.</p>
-
-      <div class="sec-title">Stack Técnica</div>
-
-      <div class="skill-row"><b>Frontend:</b> React · Next.js · TypeScript · JavaScript · Vite · React Query · Tailwind CSS</div>
-      <div class="skill-row"><b>Backend:</b> NestJS · Node.js · Python · Django REST Framework · REST API · WebSockets · tRPC</div>
-      <div class="skill-row"><b>Banco de Dados:</b> PostgreSQL · MongoDB · Prisma · Mongoose · Supabase</div>
-      <div class="skill-row"><b>Infra &amp; DevOps:</b> Docker · CI/CD · BullMQ · Redis · RabbitMQ · Cronjobs</div>
-      <div class="skill-row"><b>IA &amp; Dados:</b> OpenAI API · Groq · Gemini · TensorFlow · Pandas · NumPy</div>
-      <div class="skill-row"><b>Arquitetura:</b> DDD · Multi-tenant · Event-driven · Race conditions</div>
-      <div class="skill-row"><b>Mobile:</b> Flutter</div>
-
-      <div class="sec-title">Formação</div>
-
-      <div class="edu-title">Bacharelado em Sistemas de Informação</div>
-      <div class="edu-sub">UNIMONTES &nbsp;·&nbsp; 2022 – 2026 (em conclusão)</div>
-      <ul class="bullets">
-        <li>Iniciação científica com publicação de 2 artigos em conferências nacionais</li>
-        <li>Laboratório de pesquisa aplicada em IA e desenvolvimento de sistemas</li>
-      </ul>
-
-      <div class="sec-title">Idiomas</div>
-
-      <div class="lang-row"><b>Português</b> — Nativo</div>
-      <div class="lang-row"><b>Inglês</b> — Avançado</div>
-
-      <div class="sec-title">Publicações</div>
-
-      <div class="pub-title">Redução de dimensionalidade de um teste de adição à internet</div>
-      <div class="pub-meta">XXVII Encontro Nacional de Modelagem Computacional · Algoritmo Genético · Otimização</div>
-
-      <div class="pub-title">Avaliação de técnicas de IA na classificação de indivíduos diabéticos e não diabéticos</div>
-      <div class="pub-meta">2º Congresso de Educação e Inovação · Machine Learning · Saúde · Classificação</div>
-
-      <div class="pub-title" style="margin-top:4px; color:#4a5569; font-weight:500;">Colaboração voluntária — TV Boxes como microcomputadores</div>
-      <div class="pub-meta">Projeto de pesquisa · UNIMONTES · Inclusão Digital</div>
-
-    </div></div></div></body>
 </html>
