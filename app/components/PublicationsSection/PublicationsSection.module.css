@@ -1,0 +1,103 @@
+.section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 48px;
+}
+
+.papersGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.paperCard {
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 28px;
+    background: var(--surface);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.paperCard:hover {
+    border-color: var(--accent);
+    background: var(--surface-hover);
+    transform: translateY(-2px);
+}
+
+.paperIcon {
+    font-size: 28px;
+    margin-bottom: 4px;
+}
+
+.paperEvent {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.paperTitle {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.paperDesc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-weight: 300;
+    flex: 1;
+}
+
+.paperFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.paperArea {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.paperArrow {
+    font-size: 14px;
+    color: var(--accent);
+    transition: transform 0.2s;
+}
+
+.paperCard:hover .paperArrow {
+    transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+    .section {
+        padding: 80px 24px;
+    }
+
+    .papersGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .papersGrid {
+        grid-template-columns: 1fr;
+    }
+}
