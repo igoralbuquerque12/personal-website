@@ -8,7 +8,7 @@ export const personalInfo = {
   email: "igorcostalins2005@gmail.com",
   linkedin: "https://www.linkedin.com/in/igor-albuquerque-30b751304/",
   github: "https://github.com/igoralbuquerque12",
-  cvUrl: "#",
+  cvUrl: "/cv - igor albuquerque.pdf",
 };
 
 export const heroStats = [

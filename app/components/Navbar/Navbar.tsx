@@ -27,7 +27,7 @@ export default function Navbar() {
                     </li>
                 ))}
             </ul>
-            <a href={personalInfo.cvUrl} className={styles.cta} download>
+            <a href={personalInfo.cvUrl} className={styles.cta} target="_blank" rel="noopener noreferrer">
                 ↓ Currículo
             </a>
         </nav>

@@ -46,7 +46,7 @@ export default function HeroSection() {
                     <a href="#contato" className={styles.btnSecondary}>
                         Entrar em contato
                     </a>
-                    <a href={personalInfo.cvUrl} className={styles.btnSecondary} download>
+                    <a href={personalInfo.cvUrl} className={styles.btnSecondary} target="_blank" rel="noopener noreferrer" download>
                         ↓ CV
                     </a>
                 </div>
