@@ -1,0 +1,93 @@
+:root {
+  --navy-950: #020817;
+  --navy-900: #040f24;
+  --navy-800: #071630;
+  --navy-700: #0c2040;
+  --navy-600: #0f2d57;
+  --blue-500: #1a4a8a;
+  --blue-400: #2563be;
+  --blue-300: #3b82f6;
+  --blue-200: #93c5fd;
+  --blue-100: #dbeafe;
+  --accent: #3b82f6;
+  --accent-dim: rgba(59, 130, 246, 0.12);
+  --accent-glow: rgba(59, 130, 246, 0.25);
+  --text-primary: #f0f4ff;
+  --text-secondary: #94a3b8;
+  --text-muted: #4a5a75;
+  --border: rgba(59, 130, 246, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --surface: rgba(7, 22, 48, 0.8);
+  --surface-hover: rgba(15, 45, 87, 0.6);
+  --font-display: var(--font-syne), sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
+  --font-body: var(--font-dm-sans), sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--navy-950);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE TEXTURE OVERLAY ─── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── ANIMATIONS ─── */
+.fadeIn {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fadeInVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--navy-950);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--navy-600);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
