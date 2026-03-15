@@ -73,3 +73,19 @@
         display: none;
     }
 }
+
+@media (max-width: 640px) {
+    .nav {
+        padding: 16px 20px;
+        gap: 16px;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .cta {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+}
