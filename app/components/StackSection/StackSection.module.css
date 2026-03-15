@@ -69,7 +69,16 @@
 }
 
 @media (max-width: 640px) {
+    .section {
+        padding: 60px 24px;
+    }
+
     .stackGroups {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .stackGroup {
+        padding: 20px;
     }
 }
