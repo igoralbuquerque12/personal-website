@@ -142,6 +142,10 @@
 }
 
 @media (max-width: 640px) {
+    .section {
+        padding: 60px 24px;
+    }
+
     .timelineItem {
         grid-template-columns: 1fr;
         gap: 8px;
@@ -149,5 +153,14 @@
 
     .timelineLeft {
         padding-left: 24px;
+    }
+
+    .timelineItem>div:last-child {
+        padding-left: 24px;
+    }
+
+    .timelineRole {
+        font-size: 18px;
+        word-break: break-word;
     }
 }
