@@ -35,6 +35,7 @@
 
 @media (max-width: 640px) {
     .footer {
+        padding: 28px 24px;
         flex-direction: column;
         gap: 16px;
         text-align: center;
