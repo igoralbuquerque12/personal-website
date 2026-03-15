@@ -97,7 +97,15 @@
 }
 
 @media (max-width: 640px) {
+    .section {
+        padding: 60px 24px;
+    }
+
     .miniGrid {
         grid-template-columns: 1fr;
+    }
+
+    .miniCard {
+        padding: 20px;
     }
 }
