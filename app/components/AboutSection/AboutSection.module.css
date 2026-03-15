@@ -84,3 +84,10 @@
         gap: 48px;
     }
 }
+
+@media (max-width: 640px) {
+    .about {
+        padding: 60px 24px;
+        gap: 32px;
+    }
+}
