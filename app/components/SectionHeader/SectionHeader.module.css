@@ -38,3 +38,14 @@
     font-weight: 300;
     max-width: 560px;
 }
+
+@media (max-width: 640px) {
+    .header {
+        margin-bottom: 40px;
+    }
+
+    .title {
+        font-size: clamp(28px, 8vw, 36px);
+        word-break: break-word;
+    }
+}
