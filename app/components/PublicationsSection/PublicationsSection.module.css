@@ -97,7 +97,17 @@
 }
 
 @media (max-width: 640px) {
+    .section {
+        padding: 60px 24px;
+    }
+
     .papersGrid {
         grid-template-columns: 1fr;
+        max-width: 100vw;
+    }
+
+    .paperCard {
+        min-width: 0;
+        word-break: break-word;
     }
 }
