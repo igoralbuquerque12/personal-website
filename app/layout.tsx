@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   title: "Igor Albuquerque — Desenvolvedor Fullstack",
   description:
     "Gosto de complexidade. Sistemas, regras de negócio, integrações.",
+  icons: {
+    icon: "/icon.png",
+  },
   keywords: [
     "Igor Albuquerque",
     "Desenvolvedor Fullstack",
