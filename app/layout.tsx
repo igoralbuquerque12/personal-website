@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Syne, DM_Mono, DM_Sans } from "next/font/google";
 import "./globals.css";
+import "./portfolio.css";
+import "./responsive.css";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -18,17 +20,18 @@ const dmMono = DM_Mono({
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-dm-sans",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Igor Albuquerque — Desenvolvedor Fullstack",
+  metadataBase: new URL("https://www.igoralbuquerque.site"),
+  title: "Igor Albuquerque — Engenharia de Software, Backend & Cloud",
   description:
-    "Gosto de complexidade. Sistemas, regras de negócio, integrações.",
+    "Backend, arquitetura de software e IA aplicados a problemas reais. Conheça a trajetória e os projetos de Igor Albuquerque: sistemas distribuídos, produtos SaaS e cloud.",
   icons: {
-    icon: "/icon.png",
+    icon: "/brand/icon.svg",
   },
   keywords: [
     "Igor Albuquerque",
@@ -38,12 +41,31 @@ export const metadata: Metadata = {
     "NestJS",
     "TypeScript",
     "Portfolio",
+    "Backend",
+    "Arquitetura de Software",
+    "AWS",
+    "System Design",
   ],
+  openGraph: {
+    title: "Igor Albuquerque — Software que resolve. Arquitetura que sustenta.",
+    description:
+      "Engenharia de Software · Backend · Cloud · Inteligência Artificial. Explore os projetos e as decisões técnicas por trás de cada entrega.",
+    locale: "pt_BR",
+    type: "website",
+    url: "https://www.igoralbuquerque.site",
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="pt-BR" className={`${syne.variable} ${dmMono.variable} ${dmSans.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${syne.variable} ${dmMono.variable} ${dmSans.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
