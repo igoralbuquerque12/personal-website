@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Igor Albuquerque · Portfólio
 
-## Getting Started
+Portfólio em português com apresentação profissional, linha do tempo, 20 projetos e frentes de trabalho, cases de arquitetura, formação, artigos e contato. Construído com Next.js, React e TypeScript.
 
-First, run the development server:
+## Executar
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra `http://localhost:3000`. O portfólio não precisa de variáveis de ambiente, banco ou serviço externo para funcionar. `next/font` baixa as fontes durante a primeira compilação e as serve junto ao site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Manter o conteúdo
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O guia completo está em **[knowledge-base/README.md](knowledge-base/README.md)**.
 
-## Learn More
+| Alteração                | Onde fazer                                                    |
+| ------------------------ | ------------------------------------------------------------- |
+| Trocar CV                | Substituir `public/cv/igor-albuquerque.pdf`, mantendo o nome  |
+| Perfil, redes e formação | `knowledge-base/profile.ts`                                   |
+| Experiências e artigos   | Arrays em `knowledge-base/profile.ts`                         |
+| Projetos principais      | `knowledge-base/projects/featured.ts`                         |
+| Mais projetos            | `knowledge-base/projects/catalog.ts`                          |
+| Campos e tipagem         | `knowledge-base/types.ts`                                     |
+| Ranking                  | Campo `rank` de cada projeto; menor aparece primeiro no grupo |
+| Fotos e figuras          | `public/images/projects/<id>/` e campo `images`               |
+| Certificações            | Preencher `certifications.items` e habilitar `enabled`        |
 
-To learn more about Next.js, take a look at the following resources:
+Cada projeto tem descrição curta, stack, contribuição, problema, solução, destaques técnicos, fluxo de arquitetura, resultados, trade-offs, galeria, links e fontes. Busca e filtros são derivados dos dados. Imagens ausentes recebem um placeholder; repositórios só aparecem quando há uma URL real.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Os modais podem ser compartilhados por `/?project=mailworks#projetos`, por exemplo. Oferecem navegação por teclado, fechamento por Escape ou pelo fundo, contenção de foco e retorno ao elemento que os abriu.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`about-me/` contém os originais fornecidos e não é publicado como conteúdo estático. Apenas os arquivos selecionados de `public/` são servidos ao visitante. As decisões de curadoria estão em [knowledge-base/SOURCES.md](knowledge-base/SOURCES.md).
 
-## Deploy on Vercel
+## Estrutura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+app/
+  page.tsx                 Seções da home (Server Component)
+  layout.tsx               Fontes e metadados
+  globals.css              Tokens e estilos globais
+  portfolio.css            Componentes visuais
+  responsive.css           Adaptações para tablet e celular
+  ui/                      Navegação, projetos, modal, ícones e diagramas
+knowledge-base/             Conteúdo tipado, fontes e guia de manutenção
+public/
+  brand/                   Identidade do site
+  cv/                      Um caminho estável para o currículo publicado
+  documents/research/      PDFs de pesquisa
+  images/profile/          Retrato otimizado
+  images/projects/         Assets organizados por projeto
+tests/                     Validação de interação, conteúdo e responsividade
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Qualidade e produção
+
+```bash
+npm run typecheck
+npm run lint
+npm run build
+npm start
+```
+
+Para os testes de navegador, instale o Chromium do Playwright uma vez:
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+É possível usar o Chrome instalado no Windows:
+
+```powershell
+$env:PLAYWRIGHT_CHROME = '1'
+npm run test:e2e
+```
+
+Os testes executam em desktop e mobile; reutilizam um servidor em `localhost:3000` ou iniciam o servidor de desenvolvimento. Para validar a versão de produção, rode `npm run build` e `npm start` antes dos testes. `npm run format` formata o código e a documentação editável.
+
+O build gera a home estaticamente. A busca e os modais são interativos no cliente; as imagens são otimizadas pelo Next.js. Para hospedar, use uma plataforma compatível com Next.js ou um servidor Node com `npm start`.
