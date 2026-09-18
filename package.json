@@ -1,12 +1,15 @@
 {
-  "name": "nextjs-app",
+  "name": "igor-albuquerque-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write app knowledge-base tests playwright.config.ts README.md",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -14,11 +17,14 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "prettier": "^3.9.8",
     "typescript": "^5"
   }
 }
