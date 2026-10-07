@@ -11,6 +11,7 @@ Esta pasta é a fonte de conteúdo do site. A interface não precisa ser alterad
 | `projects/featured.ts` | Sete cases com documentação técnica aprofundada                        |
 | `projects/catalog.ts`  | Demais entregas, estudos e pesquisas do inventário                     |
 | `index.ts`             | Catálogo consolidado, ordenado por `rank`                              |
+| `docs/<id>/`           | Guia e manual em Markdown dos projetos com página própria              |
 | `SOURCES.md`           | Fontes, divergências e decisões editoriais                             |
 
 ## Adicionar um projeto
@@ -27,6 +28,31 @@ Esta pasta é a fonte de conteúdo do site. A interface não precisa ser alterad
 `images: []` produz um placeholder. Cada imagem aceita `kind: "logo" | "screenshot" | "architecture"`, `src`, `alt` e `caption`. O modal exibe toda a galeria; o primeiro arquivo ilustra o cartão principal. Os diagramas de fluxo são renderizados a partir de `architecture.steps`, sem depender de imagens externas.
 
 O helper `entry()` no catálogo preenche valores vazios para casos cuja documentação é breve. Ele não inventa detalhes técnicos. Novos cases com documentação completa devem preencher o contrato integral, como os sete projetos principais.
+
+## Página própria de um projeto (guia + docs)
+
+Um projeto com o campo `docs` ganha duas páginas e um modal resumido:
+
+| URL                        | Conteúdo                          | Arquivo                               |
+| -------------------------- | --------------------------------- | ------------------------------------- |
+| `/projetos/<id>`           | Guia: como o projeto funciona     | `docs/<id>/guide.<idioma>.md`         |
+| `/projetos/<id>/docs`      | Documentação: manual de uso       | `docs/<id>/manual.<idioma>.md`        |
+| `/projetos/<id>/en[/docs]` | As mesmas páginas em outro idioma | Mesmo padrão, com o idioma no arquivo |
+
+Para habilitar em outro projeto:
+
+1. Crie `knowledge-base/docs/<id>/` com `guide.pt-BR.md` e `manual.pt-BR.md` (e os equivalentes `.en.md`, se houver tradução).
+2. Adicione `docs: { locales: ["pt-BR", "en"] }` ao projeto. O primeiro idioma é o padrão e não aparece na URL; cada idioma listado precisa dos dois arquivos, ou o build falha.
+
+Nada mais precisa mudar: as rotas, o seletor de idioma, o índice lateral (títulos `##`) e as chamadas entre guia e docs são gerados a partir desse campo. O `# título` de cada arquivo vira o cabeçalho da página. O Markdown aceita tabelas, blocos de código e âncoras internas no formato do GitHub.
+
+**Só "Como funciona".** Para um projeto sem manual, declare `pages: ["guide"]` (como o Jarvis: `docs: { locales: ["pt-BR", "en"], pages: ["guide"] }`). Só o `guide.<idioma>.md` é exigido; a rota `/docs`, as abas e os links para a documentação deixam de existir.
+
+**Diagramas e imagens.** Use a sintaxe de imagem do Markdown com caminho absoluto: `![Descrição](/images/projects/<id>/docs/arquivo.webp)`. Guarde os arquivos em `public/images/projects/<id>/docs/` e, quando a imagem tiver texto, uma versão por idioma em uma subpasta (`docs/en/`). HTML cru (`<img>`, `<p align>`) não é renderizado. Cada imagem abre em tamanho real ao clicar.
+
+No modal, um projeto com `docs` exibe apenas a visão geral, sem abas, com o botão **Ver com detalhes** e links para o guia e para a documentação. `highlights`, `architecture` e `tradeoffs` continuam obrigatórios no contrato, mas só aparecem no modal dos projetos sem página própria.
+
+Um novo idioma exige uma entrada em `DocLocale` (`types.ts`), em `docLocaleSegments` (`docs/routes.ts`) e nos textos de interface de `app/ui/project-doc.tsx`.
 
 ## Ranking editorial
 
