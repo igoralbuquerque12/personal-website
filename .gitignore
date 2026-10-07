@@ -40,9 +40,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-vibe-git/
+/vibe-git/
 /tmp/
 /test-results/
 /playwright-report/
 
 about-me/
+
+docs temporary/
+article-ideas/
