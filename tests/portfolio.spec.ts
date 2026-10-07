@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import {
+  ecosystem,
   projects,
   projectCategories,
   projectDocHref,
@@ -27,6 +28,13 @@ test("catálogo íntegro, assets existentes e links válidos", async ({
     for (const link of project.links)
       expect(link.url).toMatch(/^(https:\/\/|\/documents\/)/);
   }
+  // O mapa de abertura só referencia projetos cadastrados e com selo definido.
+  const mapped = new Set(ecosystem.nodes.map((node) => node.id));
+  expect(mapped.size).toBe(ecosystem.nodes.length);
+  for (const id of mapped)
+    expect(projects.find((project) => project.id === id)?.origin).toBeTruthy();
+  for (const { from, to } of ecosystem.connections)
+    expect(mapped.has(from) && mapped.has(to) && from !== to).toBe(true);
   for (const path of [
     profile.cv.url,
     ...publications.map((item) => item.url),
@@ -43,7 +51,7 @@ test("home completa, responsiva e sem erros de execução", async ({ page }) => 
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Software que",
+    "Construí cada um",
   );
   const cards = page.locator(".flagship-project, .project-card, .catalog-card");
   await expect(cards).toHaveCount(projects.length);
@@ -68,6 +76,140 @@ test("home completa, responsiva e sem erros de execução", async ({ page }) => 
     page.getByRole("link", { name: "Baixar currículo" }),
   ).toHaveAttribute("href", profile.cv.url);
   expect(errors).toEqual([]);
+});
+
+test("mapa de abertura: nós, curvas, rótulos e legenda", async ({
+  page,
+  isMobile,
+}) => {
+  const { nodes, connections } = ecosystem;
+  const touching = (id: string) =>
+    connections.filter((item) => item.from === id || item.to === id);
+  await page.goto("/");
+  const map = page.locator(".eco-map");
+  await expect(map.locator(".eco-node")).toHaveCount(nodes.length);
+  await expect(map.locator(".eco-flow[d^=M]")).toHaveCount(connections.length);
+  await expect(map.locator(".eco-chip")).toHaveCount(connections.length);
+  await expect(page.locator(".ecosystem .sr-only li")).toHaveCount(
+    connections.length,
+  );
+  const shown = map.locator(".eco-chip:not(.is-hidden)");
+  if (isMobile) {
+    // Tela pequena: só os rótulos do projeto em foco, que começa pelo da legenda.
+    await expect(shown).toHaveCount(touching("jarvis").length);
+  } else {
+    await expect(shown).toHaveCount(connections.length);
+    // Os rótulos se acomodam sobre as curvas sem encostar em nenhum card.
+    await expect
+      .poll(() =>
+        map.evaluate((element) => {
+          const boxes = (selector: string) =>
+            [...element.querySelectorAll(selector)].map((item) =>
+              item.getBoundingClientRect(),
+            );
+          const cards = boxes(".eco-node");
+          return boxes(".eco-chip").filter((chip) =>
+            cards.some(
+              (card) =>
+                chip.left < card.right &&
+                chip.right > card.left &&
+                chip.top < card.bottom &&
+                chip.bottom > card.top,
+            ),
+          ).length;
+        }),
+      )
+      .toBe(0);
+  }
+  const caption = page.locator(".eco-caption");
+  await expect(caption).toContainText("Jarvis:");
+  // Os cards flutuam, então o Playwright nunca os considera estáveis: force.
+  const target = nodes.find((node) => node.id === "care-copilot")!;
+  await map.locator(`[data-node="${target.id}"]`).hover({ force: true });
+  await expect(caption).toContainText("Care Copilot:");
+  await expect(caption).toContainText(target.caption.highlight);
+  await expect(shown).toHaveCount(
+    isMobile ? touching(target.id).length : connections.length,
+  );
+  await expect(map.locator(".eco-chip.is-off")).toHaveCount(
+    isMobile ? 0 : connections.length - touching(target.id).length,
+  );
+  const related = new Set(
+    touching(target.id).flatMap((item) => [item.from, item.to]),
+  );
+  await expect(map.locator(".eco-node.is-off")).toHaveCount(
+    nodes.length - related.size,
+  );
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+});
+
+test("mapa de abertura: clique e teclado abrem o modal do projeto", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const node = page.locator('.eco-map [data-node="jarvis"]');
+  const dialog = page.getByRole("dialog");
+  await expect(node).toHaveAccessibleName(/^Jarvis, open source/);
+  await node.click({ force: true });
+  await expect(dialog).toBeVisible();
+  await expect(page).toHaveURL(/project=jarvis/);
+  await expect(dialog.getByRole("heading", { level: 2 })).toHaveText("Jarvis.");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(node).toBeFocused();
+  await expect(page).not.toHaveURL(/project=/);
+  await page.keyboard.press("Enter");
+  await expect(dialog).toBeVisible();
+  await expect(page).toHaveURL(/project=jarvis/);
+  await page.goBack();
+  await expect(dialog).toHaveCount(0);
+});
+
+test("mapa de abertura: arrastar move o card sem abrir o modal", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "No toque o arraste fica desligado.");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const node = page.locator('.eco-map [data-node="care-copilot"]');
+  const before = (await node.boundingBox())!;
+  await page.mouse.move(before.x + 20, before.y + 20);
+  await page.mouse.down();
+  await page.mouse.move(before.x + 80, before.y + 60, { steps: 5 });
+  await page.mouse.up();
+  const after = (await node.boundingBox())!;
+  expect(after.x - before.x).toBeGreaterThan(30);
+  expect(after.y - before.y).toBeGreaterThan(20);
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page).not.toHaveURL(/project=/);
+});
+
+test("mapa de abertura respeita prefers-reduced-motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const map = page.locator(".eco-map");
+  await expect(map.locator(".eco-flow[d^=M]")).toHaveCount(
+    ecosystem.connections.length,
+  );
+  await expect(map.locator(".eco-particle, .eco-packet")).toHaveCount(0);
+  const transforms = () =>
+    map
+      .locator(".eco-node")
+      .evaluateAll((items) =>
+        items.map((item) => (item as HTMLElement).style.transform),
+      );
+  const before = await transforms();
+  // Mais que um ciclo da legenda e dois pacotes de evento.
+  await page.waitForTimeout(6500);
+  expect(await transforms()).toEqual(before);
+  await expect(page.locator(".eco-caption")).toContainText("Jarvis:");
+  await expect(map.locator(".eco-particle, .eco-packet")).toHaveCount(0);
+  await expect(page.locator(".eco-feed > div")).toHaveCount(0);
 });
 
 test("filtros, busca por stack e recuperação do estado vazio", async ({
