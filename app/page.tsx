@@ -161,36 +161,6 @@ export default function Home() {
             <span className="languages mono">{profile.languages}</span>
           </div>
         </section>
-        <div className="metrics-strip">
-          <div className="section-shell metrics-grid">
-            <div>
-              <strong>
-                5<span> concessionárias</span>
-              </strong>
-              <p>atendidas pelo CRM na Nocorp</p>
-            </div>
-            <div>
-              <strong>
-                ~100<span> vendedores</span>
-              </strong>
-              <p>na operação do mesmo ecossistema</p>
-            </div>
-            <div>
-              <strong>
-                10<span> pessoas</span>
-              </strong>
-              <p>usando o vibe-git diariamente</p>
-            </div>
-            <div className="metrics-note">
-              <Icon name="layers" size={25} />
-              <p>
-                Software com contexto.
-                <br />
-                <strong>Impacto no trabalho real.</strong>
-              </p>
-            </div>
-          </div>
-        </div>
         <section
           id="experiencia"
           className="experience-section section-shell section-space"
