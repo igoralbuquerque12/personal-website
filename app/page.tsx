@@ -8,7 +8,7 @@ import {
 } from "@/knowledge-base";
 import { Navigation } from "./ui/navigation";
 import { Icon } from "./ui/icons";
-import { SystemSketch } from "./ui/system-sketch";
+import { EcosystemMap } from "./ui/ecosystem-map";
 import { ProjectBrowser } from "./ui/project-browser";
 
 function SectionHeading({
@@ -47,81 +47,19 @@ export default function Home() {
       <Navigation />
       <main id="conteudo">
         <section
-          className="hero section-shell"
           id="inicio"
+          className="ecosystem section-shell"
           aria-labelledby="hero-title"
         >
-          <div className="hero-topline">
-            <span className="eyebrow">
-              <span className="status-dot" /> ENGENHEIRO DE SOFTWARE
+          <h1 id="hero-title">
+            Explore o que eu construí
+            <br />
+            <span>
+              Alguns dos meus projetos se integram entre si. Veja o ecossistema que desenvolvi abaixo
+              <span className="accent-dot">.</span>
             </span>
-            <span className="mono hero-location">MONTES CLAROS, BR ↗</span>
-          </div>
-          <div className="hero-grid">
-            <div className="hero-copy">
-              <p className="hero-greeting">Olá, sou o Igor.</p>
-              <h1 id="hero-title">
-                Software que
-                <br />
-                resolve.
-                <br />
-                <span>
-                  Arquitetura
-                  <br />
-                  que sustenta.
-                </span>
-              </h1>
-              <p className="hero-description">{profile.introduction}</p>
-              <div className="hero-actions">
-                <a className="button button-dark" href="#projetos">
-                  Explore meus projetos <Icon name="arrow" size={18} />
-                </a>
-                <a
-                  className="button button-outline"
-                  href={profile.cv.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Ver currículo <Icon name="file" size={17} />
-                </a>
-              </div>
-              <div className="hero-socials">
-                <a href={profile.github} target="_blank" rel="noreferrer">
-                  <Icon name="github" size={16} />
-                  GitHub <Icon name="arrow" size={12} />
-                </a>
-                <a href={profile.linkedin} target="_blank" rel="noreferrer">
-                  <Icon name="linkedin" size={16} />
-                  LinkedIn <Icon name="arrow" size={12} />
-                </a>
-                <span className="hero-social-divider" />
-                <span>Backend. Cloud. IA.</span>
-              </div>
-            </div>
-            <div className="hero-visual">
-              <div className="visual-corner mono">
-                PENSAR EM SISTEMAS.
-                <br />
-                CONSTRUIR COM PROPÓSITO.
-              </div>
-              <SystemSketch />
-              <div className="hero-note">
-                <span className="note-star">✳</span>
-                <p>
-                  O que acontece por trás da tela
-                  <br />
-                  <strong>é o que me move.</strong>
-                </p>
-                <span className="note-line" />
-              </div>
-            </div>
-          </div>
-          <div className="hero-bottom mono">
-            <span>DA REGRA DE NEGÓCIO AO DEPLOY</span>
-            <a href="#sobre">
-              CONHEÇA MEU TRABALHO <Icon name="down" size={15} />
-            </a>
-          </div>
+          </h1>
+          <EcosystemMap />
         </section>
         <section id="sobre" className="about-section section-shell">
           <div className="about-person">
