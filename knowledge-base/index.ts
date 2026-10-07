@@ -11,10 +11,16 @@ export {
 export type {
   DocLocale,
   DocPage,
+  Ecosystem,
+  EcosystemConnection,
+  EcosystemKind,
+  EcosystemNode,
   Project,
   ProjectCategory,
   ProjectImage,
+  ProjectOrigin,
 } from "./types";
+export { ecosystem } from "./ecosystem";
 export { projectDocHref, projectDocPages } from "./docs/routes";
 export const projects = [...featuredProjects, ...catalogProjects].sort(
   (a, b) => a.rank - b.rank,
