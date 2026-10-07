@@ -8,6 +8,7 @@ export const featuredProjects: Project[] = [
     name: "MailWorks",
     category: "Backend & Cloud",
     context: "Open source · Arquitetura AWS",
+    origin: "open-source",
     rank: 1,
     featured: true,
     rankingReason:
@@ -106,6 +107,7 @@ export const featuredProjects: Project[] = [
     name: "Care Copilot",
     category: "IA & produtos",
     context: "Open source · SaaS clínico",
+    origin: "open-source",
     rank: 2,
     featured: true,
     rankingReason:
@@ -202,6 +204,7 @@ export const featuredProjects: Project[] = [
     name: "Grau Técnico",
     category: "Backend & Cloud",
     context: "Freelance · Sistema privado",
+    origin: "freelance",
     rank: 3,
     featured: true,
     rankingReason:
@@ -280,6 +283,7 @@ export const featuredProjects: Project[] = [
     name: "Jarvis",
     category: "IA & produtos",
     context: "Open source · Assistente pessoal",
+    origin: "open-source",
     rank: 4,
     featured: true,
     rankingReason:
@@ -373,6 +377,7 @@ export const featuredProjects: Project[] = [
     name: "Fala Comigo",
     category: "IA & produtos",
     context: "Colaborativo · Plataforma de idiomas",
+    origin: "open-source",
     rank: 5,
     featured: true,
     rankingReason:
@@ -469,6 +474,7 @@ export const featuredProjects: Project[] = [
     name: "PixelPhone",
     category: "IA & produtos",
     context: "Freelance · Sistema privado",
+    origin: "freelance",
     rank: 6,
     featured: true,
     rankingReason:
@@ -554,6 +560,7 @@ export const featuredProjects: Project[] = [
     name: "vibe-git",
     category: "Dev tools",
     context: "Open source · CLI no npm",
+    origin: "open-source",
     rank: 7,
     featured: true,
     rankingReason:
