@@ -1,8 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { profile, type Project } from "@/knowledge-base";
+import {
+  profile,
+  projectDocHref,
+  projectDocPages,
+  type Project,
+} from "@/knowledge-base";
 import { Icon } from "./icons";
 
 export function ProjectDialog({
@@ -14,6 +20,9 @@ export function ProjectDialog({
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   const [tab, setTab] = useState("overview");
+  // Projetos com página própria mostram só a visão geral; o restante fica lá.
+  const hasPage = Boolean(project.docs);
+  const hasManual = projectDocPages(project).includes("manual");
   const tabs = [
     { id: "overview", label: "Visão geral" },
     { id: "architecture", label: "Arquitetura" },
@@ -84,6 +93,11 @@ export function ProjectDialog({
           ))}
         </div>
         <div className="dialog-links">
+          {hasPage && (
+            <Link className="dialog-detail-link" href={projectDocHref(project)}>
+              Ver com detalhes <Icon name="arrow" size={15} />
+            </Link>
+          )}
           {project.links.map((link) => (
             <a
               key={link.url}
@@ -112,44 +126,49 @@ export function ProjectDialog({
           )}
         </div>
       </header>
-      <div
-        className="dialog-tabs"
-        role="tablist"
-        aria-label="Detalhes do projeto"
-      >
-        {tabs.map((item, index) => (
-          <button
-            key={item.id}
-            id={`tab-${item.id}`}
-            role="tab"
-            type="button"
-            aria-selected={tab === item.id}
-            aria-controls={`panel-${item.id}`}
-            tabIndex={tab === item.id ? 0 : -1}
-            onClick={() => setTab(item.id)}
-            onKeyDown={(event) => {
-              let next = index;
-              if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
-              else if (event.key === "ArrowLeft")
-                next = (index + tabs.length - 1) % tabs.length;
-              else if (event.key === "Home") next = 0;
-              else if (event.key === "End") next = tabs.length - 1;
-              else return;
-              event.preventDefault();
-              setTab(tabs[next].id);
-              document.getElementById(`tab-${tabs[next].id}`)?.focus();
-            }}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
+      {!hasPage && (
+        <div
+          className="dialog-tabs"
+          role="tablist"
+          aria-label="Detalhes do projeto"
+        >
+          {tabs.map((item, index) => (
+            <button
+              key={item.id}
+              id={`tab-${item.id}`}
+              role="tab"
+              type="button"
+              aria-selected={tab === item.id}
+              aria-controls={`panel-${item.id}`}
+              tabIndex={tab === item.id ? 0 : -1}
+              onClick={() => setTab(item.id)}
+              onKeyDown={(event) => {
+                let next = index;
+                if (event.key === "ArrowRight")
+                  next = (index + 1) % tabs.length;
+                else if (event.key === "ArrowLeft")
+                  next = (index + tabs.length - 1) % tabs.length;
+                else if (event.key === "Home") next = 0;
+                else if (event.key === "End") next = tabs.length - 1;
+                else return;
+                event.preventDefault();
+                setTab(tabs[next].id);
+                document.getElementById(`tab-${tabs[next].id}`)?.focus();
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
       <div
         className="dialog-content"
-        role="tabpanel"
-        id={`panel-${tab}`}
-        aria-labelledby={`tab-${tab}`}
-        tabIndex={0}
+        {...(!hasPage && {
+          role: "tabpanel",
+          id: `panel-${tab}`,
+          "aria-labelledby": `tab-${tab}`,
+          tabIndex: 0,
+        })}
       >
         {tab === "overview" && (
           <>
@@ -181,12 +200,35 @@ export function ProjectDialog({
                 ))}
               </ul>
             </section>
-            <button
-              className="text-button"
-              onClick={() => setTab("architecture")}
-            >
-              Explorar a arquitetura <Icon name="arrow" size={17} />
-            </button>
+            {hasPage ? (
+              <div className="dialog-more">
+                <div>
+                  <span className="eyebrow">VÁ ALÉM DO RESUMO</span>
+                  <p>
+                    {hasManual
+                      ? "Arquitetura e decisões técnicas estão no guia. Comandos, flags e configuração, na documentação."
+                      : "Arquitetura, fluxos e decisões técnicas estão no guia completo do projeto."}
+                  </p>
+                </div>
+                <div className="dialog-more-links">
+                  <Link href={projectDocHref(project)}>
+                    Como funciona <Icon name="arrow" size={15} />
+                  </Link>
+                  {hasManual && (
+                    <Link href={projectDocHref(project, "manual")}>
+                      Documentação <Icon name="arrow" size={15} />
+                    </Link>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <button
+                className="text-button"
+                onClick={() => setTab("architecture")}
+              >
+                Explorar a arquitetura <Icon name="arrow" size={17} />
+              </button>
+            )}
           </>
         )}
         {tab === "architecture" && (
