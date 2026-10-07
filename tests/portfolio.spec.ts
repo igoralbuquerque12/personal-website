@@ -3,6 +3,8 @@ import AxeBuilder from "@axe-core/playwright";
 import {
   projects,
   projectCategories,
+  projectDocHref,
+  projectDocPages,
   profile,
   publications,
 } from "../knowledge-base";
@@ -145,6 +147,19 @@ test("todos os projetos abrem por link direto e renderizam todas as abas", async
     await expect(dialog.getByRole("heading", { level: 2 })).toHaveText(
       `${project.name}.`,
     );
+    if (project.docs) {
+      await expect(dialog.getByRole("tab")).toHaveCount(0);
+      await expect(dialog.getByText("MINHA CONTRIBUIÇÃO")).toBeVisible();
+      await expect(
+        dialog.getByRole("link", { name: "Ver com detalhes" }),
+      ).toHaveAttribute("href", projectDocHref(project));
+      await expect(
+        dialog.getByRole("link", { name: "Documentação" }),
+      ).toHaveCount(projectDocPages(project).includes("manual") ? 1 : 0);
+      await dialog.getByRole("button", { name: "Fechar projeto" }).click();
+      await expect(dialog).toHaveCount(0);
+      continue;
+    }
     await dialog.getByRole("tab", { name: "Arquitetura", exact: true }).click();
     if (project.images.length === 0)
       await expect(
@@ -173,6 +188,115 @@ test("todos os projetos abrem por link direto e renderizam todas as abas", async
     await dialog.getByRole("button", { name: "Fechar projeto" }).click();
     await expect(dialog).toHaveCount(0);
   }
+});
+
+test("página do projeto: guia, docs, idiomas e navegação", async ({
+  page,
+  request,
+  isMobile,
+}) => {
+  test.setTimeout(90_000);
+  const audit = async () =>
+    expect(
+      (
+        await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+          .analyze()
+      ).violations.map(({ id, nodes }) => ({
+        id,
+        targets: nodes.map((node) => node.target),
+      })),
+    ).toEqual([]);
+  for (const project of projects.filter((item) => item.docs)) {
+    const [defaultLocale, otherLocale] = project.docs!.locales;
+    for (const locale of project.docs!.locales)
+      for (const doc of projectDocPages(project)) {
+        await page.goto(projectDocHref(project, doc, locale));
+        await expect(page.locator(".doc-page")).toHaveAttribute("lang", locale);
+        await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+        for (const image of await page.locator(".doc-prose img").all()) {
+          await image.scrollIntoViewIfNeeded();
+          await expect
+            .poll(() =>
+              image.evaluate(
+                (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
+              ),
+            )
+            .toBe(true);
+        }
+        expect(await page.locator(".doc-prose h2").count()).toBeGreaterThan(3);
+        // Toda âncora interna (índice lateral e sumário) aponta para um título real.
+        for (const href of await page
+          .locator('.doc-layout a[href^="#"]')
+          .evaluateAll((links) => links.map((a) => a.getAttribute("href")!)))
+          await expect(
+            page.locator(`[id="${decodeURIComponent(href.slice(1))}"]`),
+          ).toHaveCount(1);
+        expect(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth <= window.innerWidth,
+          ),
+        ).toBe(true);
+        await audit();
+      }
+    if (!isMobile) {
+      // O índice lateral marca a seção em leitura conforme a rolagem.
+      await page.goto(projectDocHref(project));
+      const tocLinks = page.locator(".doc-toc a");
+      const marked = page.locator('.doc-toc a[aria-current="location"]');
+      await tocLinks.nth(2).click();
+      await expect(marked).toHaveCount(1);
+      await expect(marked).toHaveAttribute(
+        "href",
+        (await tocLinks.nth(2).getAttribute("href"))!,
+      );
+      await page.evaluate(() =>
+        window.scrollTo(0, document.documentElement.scrollHeight),
+      );
+      await expect(marked).toHaveAttribute(
+        "href",
+        (await tocLinks.last().getAttribute("href"))!,
+      );
+      await audit();
+    }
+    await page.goto(`/?project=${project.id}`);
+    await page.getByRole("link", { name: "Ver com detalhes" }).click();
+    await expect(page).toHaveURL(projectDocHref(project));
+    const hasManual = projectDocPages(project).includes("manual");
+    const current = hasManual ? "manual" : "guide";
+    if (hasManual) {
+      await page
+        .locator(".doc-tabs")
+        .getByRole("link", { name: "Docs", exact: true })
+        .click();
+      await expect(page).toHaveURL(projectDocHref(project, "manual"));
+    } else {
+      // Projeto só com guia: sem abas, sem chamada para docs e sem rota /docs.
+      await expect(page.locator(".doc-tabs, .doc-next")).toHaveCount(0);
+      expect((await request.get(`/projetos/${project.id}/docs`)).status()).toBe(
+        404,
+      );
+    }
+    if (otherLocale) {
+      await page.locator(`.doc-locales a[hreflang="${otherLocale}"]`).click();
+      await expect(page).toHaveURL(
+        projectDocHref(project, current, otherLocale),
+      );
+      if (hasManual) {
+        await page.locator(".doc-next").getByRole("link").click();
+        await expect(page).toHaveURL(
+          projectDocHref(project, "guide", otherLocale),
+        );
+      }
+    }
+    await page.locator(".doc-back").click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    expect(defaultLocale).toBe(project.docs!.locales[0]);
+    expect(
+      (await request.get(`/projetos/${project.id}/nao-existe`)).status(),
+    ).toBe(404);
+  }
+  expect((await request.get("/projetos/mailworks")).status()).toBe(404);
 });
 
 test("histórico, backdrop e menu mobile", async ({ page, isMobile }) => {
