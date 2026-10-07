@@ -3,6 +3,7 @@ import { Syne, DM_Mono, DM_Sans } from "next/font/google";
 import "./globals.css";
 import "./portfolio.css";
 import "./responsive.css";
+import "./ecosystem.css";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -47,7 +48,8 @@ export const metadata: Metadata = {
     "System Design",
   ],
   openGraph: {
-    title: "Igor Albuquerque — Software que resolve. Arquitetura que sustenta.",
+    title:
+      "Igor Albuquerque — Construí cada um. Depois, fiz eles trabalharem juntos.",
     description:
       "Engenharia de Software · Backend · Cloud · Inteligência Artificial. Explore os projetos e as decisões técnicas por trás de cada entrega.",
     locale: "pt_BR",
