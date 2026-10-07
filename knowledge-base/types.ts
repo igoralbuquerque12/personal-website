@@ -13,6 +13,21 @@ export interface ArchitectureStep {
   detail: string;
 }
 
+export type DocLocale = "pt-BR" | "en";
+export type DocPage = "guide" | "manual";
+
+/**
+ * Habilita a página própria do projeto: `/projetos/<id>` (guia) e
+ * `/projetos/<id>/docs` (manual). O conteúdo fica em
+ * `knowledge-base/docs/<id>/<página>.<idioma>.md`.
+ */
+export interface ProjectDocs {
+  /** O primeiro idioma é o padrão; os demais ganham um segmento na URL. */
+  locales: DocLocale[];
+  /** Páginas publicadas. Sem este campo, o projeto tem guia e manual. */
+  pages?: DocPage[];
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -46,6 +61,8 @@ export interface Project {
   }[];
   /** Evidências locais para futuras revisões editoriais. */
   sources: string[];
+  /** Quando presente, o modal vira um resumo que aponta para a página própria. */
+  docs?: ProjectDocs;
 }
 
 export interface Experience {

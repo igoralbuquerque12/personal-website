@@ -8,7 +8,14 @@ export {
   publications,
   certifications,
 } from "./profile";
-export type { Project, ProjectCategory, ProjectImage } from "./types";
+export type {
+  DocLocale,
+  DocPage,
+  Project,
+  ProjectCategory,
+  ProjectImage,
+} from "./types";
+export { projectDocHref, projectDocPages } from "./docs/routes";
 export const projects = [...featuredProjects, ...catalogProjects].sort(
   (a, b) => a.rank - b.rank,
 );
