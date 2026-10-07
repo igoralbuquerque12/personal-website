@@ -1,6 +1,8 @@
 export type ProjectCategory =
   "Backend & Cloud" | "IA & produtos" | "Dev tools" | "Pesquisa & web";
 
+export type ProjectOrigin = "open-source" | "freelance";
+
 export interface ProjectImage {
   src: string;
   alt: string;
@@ -33,6 +35,8 @@ export interface Project {
   name: string;
   category: ProjectCategory;
   context: string;
+  /** Selo do mapa de abertura. Só os projetos que aparecem nele precisam declarar. */
+  origin?: ProjectOrigin;
   /** Menor número aparece primeiro. Critério editorial, não nota de qualidade. */
   rank: number;
   rankingReason: string;
@@ -93,4 +97,43 @@ export interface Certification {
   issuer: string;
   year: string;
   url?: string;
+}
+
+export type EcosystemKind = "mail" | "alert" | "git";
+
+/** Posição do centro do card em frações do mapa (0 a 1) e rotação em graus. */
+export interface EcosystemPlacement {
+  x: number;
+  y: number;
+  r: number;
+}
+
+export interface EcosystemNode {
+  /** `id` do projeto: nome, selo e modal vêm dele. */
+  id: string;
+  /** `integrated` ganha o card escuro e entra no rodízio da legenda. */
+  role: "integrated" | "product";
+  subtitle: string;
+  /** Legenda do canto: `text` descreve o projeto, `highlight` (em negrito) a integração. */
+  caption: { text: string; highlight: string };
+  desktop: EcosystemPlacement;
+  mobile: EcosystemPlacement;
+}
+
+export interface EcosystemConnection {
+  /** A direção é a do dado: `from` é quem envia. */
+  from: string;
+  to: string;
+  kind: EcosystemKind;
+  /** Frase curta com verbo, sempre visível sobre a linha. */
+  label: string;
+  /** Linha do log de atividade simulada. */
+  event: string;
+  /** Curvatura em px; o sinal escolhe o lado para onde a linha dobra. */
+  bend: number;
+}
+
+export interface Ecosystem {
+  nodes: EcosystemNode[];
+  connections: EcosystemConnection[];
 }
