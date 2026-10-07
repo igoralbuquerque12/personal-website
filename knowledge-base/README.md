@@ -10,6 +10,7 @@ Esta pasta é a fonte de conteúdo do site. A interface não precisa ser alterad
 | `profile.ts`           | Perfil, links, currículo, trajetória, formação, competências e artigos |
 | `projects/featured.ts` | Sete cases com documentação técnica aprofundada                        |
 | `projects/catalog.ts`  | Demais entregas, estudos e pesquisas do inventário                     |
+| `ecosystem.ts`         | Mapa da abertura: cards, posições, conexões, rótulos e legendas        |
 | `index.ts`             | Catálogo consolidado, ordenado por `rank`                              |
 | `docs/<id>/`           | Guia e manual em Markdown dos projetos com página própria              |
 | `SOURCES.md`           | Fontes, divergências e decisões editoriais                             |
@@ -53,6 +54,10 @@ Nada mais precisa mudar: as rotas, o seletor de idioma, o índice lateral (títu
 No modal, um projeto com `docs` exibe apenas a visão geral, sem abas, com o botão **Ver com detalhes** e links para o guia e para a documentação. `highlights`, `architecture` e `tradeoffs` continuam obrigatórios no contrato, mas só aparecem no modal dos projetos sem página própria.
 
 Um novo idioma exige uma entrada em `DocLocale` (`types.ts`), em `docLocaleSegments` (`docs/routes.ts`) e nos textos de interface de `app/ui/project-doc.tsx`.
+
+## Mapa da abertura
+
+A home começa pelo mapa animado descrito em `ecosystem.ts`. Cada item de `nodes` aponta para um projeto pelo `id` (nome e modal vêm dele) e esse projeto precisa declarar `origin: "open-source" | "freelance"`, que define o selo do card. `desktop` e `mobile` posicionam o centro do card em frações do mapa (0 a 1), com a rotação em graus. Em `connections`, a direção é a do dado (`from` é quem envia), `label` é a frase exibida sobre a linha, `event` é o texto do log de atividade simulada e `bend` é a curvatura da linha em px.
 
 ## Ranking editorial
 
