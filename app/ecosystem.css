@@ -1,0 +1,344 @@
+/* Abertura: título e mapa animado dos projetos integrados */
+.ecosystem {
+  --eco-mail: #2f8f6b;
+  --eco-mail-text: #1f6b4f;
+  --eco-alert: #d0602f;
+  --eco-alert-text: #a8461c;
+  --eco-git: #8a9180;
+  --eco-git-text: #5b6152;
+  --eco-open: #709747;
+  --eco-freelance: #c9822b;
+  padding: 39px 0 44px;
+  border-bottom: 1px solid var(--line);
+}
+.ecosystem h1 {
+  font-size: clamp(24px, 2.6vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.05em;
+  margin-bottom: 24px;
+}
+.ecosystem h1 > span {
+  color: #718264;
+  font-size: 0.7em;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+}
+.kind-mail,
+.tone-mail {
+  --kind: var(--eco-mail);
+  --kind-text: var(--eco-mail-text);
+}
+.kind-alert,
+.tone-alert {
+  --kind: var(--eco-alert);
+  --kind-text: var(--eco-alert-text);
+}
+.kind-git,
+.tone-git {
+  --kind: var(--eco-git);
+  --kind-text: var(--eco-git-text);
+}
+.tone-open-source {
+  --kind: var(--eco-open);
+}
+.tone-freelance {
+  --kind: var(--eco-freelance);
+}
+.eco-stage {
+  position: relative;
+}
+.eco-map {
+  position: relative;
+  height: 600px;
+  background-image: radial-gradient(#c9d1c0 1px, transparent 1px);
+  background-size: 18px 18px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.eco-wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.eco-line,
+.eco-chip {
+  transition: opacity 0.25s;
+}
+.eco-line.is-off,
+.eco-chip.is-off {
+  opacity: 0.12;
+}
+.eco-track {
+  fill: none;
+  stroke: var(--kind);
+  stroke-opacity: 0.16;
+  stroke-width: 6;
+}
+.eco-flow {
+  fill: none;
+  stroke: var(--kind);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 9;
+  animation: eco-flow linear infinite;
+}
+.eco-line.is-on .eco-flow {
+  stroke-width: 2.4;
+}
+.eco-map[data-paused] .eco-flow {
+  animation-play-state: paused;
+}
+@keyframes eco-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+.eco-particle,
+.eco-packet {
+  fill: var(--kind);
+}
+.eco-chip {
+  --x: var(--dx);
+  --y: var(--dy);
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: max-content;
+  max-width: 150px;
+  padding: 4px 9px;
+  border: 1.5px solid var(--kind);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--kind-text);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  pointer-events: none;
+}
+.eco-chip.is-hidden {
+  opacity: 0;
+}
+.eco-node {
+  --x: var(--dx);
+  --y: var(--dy);
+  --rot: var(--dr);
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  transform: translate(-50%, -50%) rotate(var(--rot));
+  z-index: 2;
+  width: 148px;
+  padding: 9px 12px;
+  border: 1px solid #cbd4c1;
+  border-radius: 8px;
+  background: #fbfcf7;
+  text-align: left;
+  line-height: 1.35;
+  cursor: grab;
+  user-select: none;
+  transition:
+    opacity 0.25s,
+    border-color 0.25s;
+}
+.eco-node:active {
+  cursor: grabbing;
+}
+.eco-node-integrated {
+  width: 158px;
+  background: #232c22;
+  border-color: #232c22;
+}
+.eco-node.is-off {
+  opacity: 0.15;
+}
+.eco-node[data-ping] {
+  border-color: var(--kind);
+}
+.eco-node[data-ping="mail"] {
+  --kind: var(--eco-mail);
+}
+.eco-node[data-ping="alert"] {
+  --kind: var(--eco-alert);
+}
+.eco-node[data-ping="git"] {
+  --kind: var(--eco-git);
+}
+.eco-node strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+.eco-subtitle {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: #62695e;
+}
+.eco-node-integrated strong {
+  color: #fff;
+}
+.eco-node-integrated .eco-subtitle {
+  color: #b6c1ac;
+}
+.eco-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 5px;
+}
+.eco-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  padding: 1px 5px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+.eco-tag-open {
+  background: var(--lime);
+  color: #2a3820;
+}
+.eco-tag-freelance {
+  background: #f3e2c4;
+  color: #7a4c12;
+}
+.eco-tag-integrated {
+  border-color: #526346;
+  color: #c6dbaf;
+}
+.eco-caption {
+  position: absolute;
+  left: 13px;
+  top: 13px;
+  z-index: 3;
+  width: 44%;
+  max-width: 300px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffffff2;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b5446;
+  transition: opacity 0.2s;
+}
+.eco-caption.is-fading {
+  opacity: 0;
+}
+.eco-caption b {
+  font-weight: 500;
+  color: var(--ink);
+}
+.eco-caption-kind {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 10px;
+  color: #62695e;
+}
+.eco-caption-kind i,
+.eco-feed i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--kind);
+}
+.eco-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #62695e;
+}
+.eco-legend i {
+  display: inline-block;
+  width: 18px;
+  margin-right: 7px;
+  border-top: 2px dashed var(--kind);
+  vertical-align: middle;
+}
+.eco-activity {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-top: 8px;
+  color: #62695e;
+}
+.eco-feed {
+  flex: 1;
+  min-width: 260px;
+  min-height: 66px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+}
+@media (min-width: 1100px) {
+  .eco-chip {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 800px) {
+  .ecosystem {
+    padding-bottom: 34px;
+  }
+  .ecosystem h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .eco-map {
+    height: 760px;
+  }
+  .eco-node,
+  .eco-chip {
+    --x: var(--mx);
+    --y: var(--my);
+    --rot: var(--mr);
+  }
+  .eco-node,
+  .eco-node-integrated {
+    width: 132px;
+    padding: 8px 10px;
+  }
+  /* A legenda sai de cima do mapa e fica entre o título e ele. */
+  .eco-caption {
+    position: static;
+    width: auto;
+    max-width: none;
+    min-height: 112px;
+    margin-bottom: 12px;
+    background: #fff;
+  }
+}
+@media (max-width: 560px) {
+  .ecosystem {
+    padding-top: 26px;
+  }
+  .ecosystem h1 {
+    font-size: clamp(22px, 6.4vw, 26px);
+  }
+  .eco-caption {
+    min-height: 132px;
+  }
+  .eco-feed {
+    min-width: 100%;
+    font-size: 11px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eco-feed {
+    display: none;
+  }
+}
