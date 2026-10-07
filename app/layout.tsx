@@ -65,8 +65,9 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       className={`${syne.variable} ${dmMono.variable} ${dmSans.variable}`}
+      suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
