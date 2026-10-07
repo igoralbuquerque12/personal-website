@@ -366,6 +366,7 @@ export const featuredProjects: Project[] = [
       },
     ],
     sources: [base, "about-me/public/projetos/jarvis/README.md"],
+    docs: { locales: ["pt-BR", "en"], pages: ["guide"] },
   },
   {
     id: "fala-comigo",
@@ -648,5 +649,6 @@ export const featuredProjects: Project[] = [
       "about-me/public/projetos/vibe-giit/README.md",
       "about-me/public/eu-igor/curriculo.pdf",
     ],
+    docs: { locales: ["pt-BR", "en"] },
   },
 ];
