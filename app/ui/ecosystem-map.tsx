@@ -653,23 +653,23 @@ export function EcosystemMap() {
           })}
         </div>
       </div>
-      <ul className="sr-only">
+      {/* <ul className="sr-only">
         {connections.map((connection, index) => (
           <li key={index}>
             {nameOf(connection.from)} → {nameOf(connection.to)}:{" "}
             {connection.label}
           </li>
         ))}
-      </ul>
-      <div className="eco-legend" aria-hidden="true">
+      </ul> */}
+      {/* <div className="eco-legend" aria-hidden="true">
         {LEGEND.map((item) => (
           <span key={item.kind} className={`kind-${item.kind}`}>
             <i />
             {item.text}
           </span>
         ))}
-      </div>
-      <div className="eco-activity" aria-hidden="true">
+      </div> */}
+      {/* <div className="eco-activity" aria-hidden="true">
         <div className="eco-feed">
           {feed.map((item) => (
             <div key={item.key} className={`kind-${item.kind}`}>
@@ -682,7 +682,7 @@ export function EcosystemMap() {
           {still ? "" : "ATIVIDADE SIMULADA · "}
           {mobile ? "TOQUE" : "ARRASTE · CLIQUE"}
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }

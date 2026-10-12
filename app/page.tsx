@@ -73,28 +73,15 @@ export default function Home() {
               />
               <span className="portrait-caption mono">PRAZER, IGOR ↗</span>
             </div>
-            <div className="about-location">
-              <Icon name="globe" size={16} />
-              <span>
-                De Montes Claros
-                <br />
-                para problemas reais.
-              </span>
-            </div>
           </div>
           <div className="about-copy">
             <p className="eyebrow">01 / UM POUCO SOBRE MIM</p>
             <h2>
-              Curiosidade para entender.
-              <br />
-              Engenharia para resolver<span className="accent-dot">.</span>
+              Engenheiro de software
             </h2>
             <p>{profile.about}</p>
             <p className="about-secondary">
-              Comecei entre pesquisa e desenvolvimento web. Hoje, construo
-              produtos SaaS, automações e aplicações com IA. Gosto especialmente
-              dos pontos em que os sistemas ficam interessantes: concorrência,
-              integrações, dados e falhas.
+              Hoje, atuo em uma plataforma de consórcios montada em microsserviços, onde também construí pipelines de ELT e de sincronização de alto volume e mantenho a infraestrutura na AWS. Fora dela, montei um ecossistema de serviços que dependem uns dos outros. O MailWorks, API de e-mails e 2FA assíncrona e multi-tenant em Lambda, SQS e SES, atende meus produtos. O Jarvis, assistente no WhatsApp com API pública, recebe os alertas de erro deles. E o vibe-git, CLI publicado no npm, versiona todos. Como freelancer, fui responsável do início ao fim por um sistema de cobranças idempotentes integrado a um legado via RPA e por uma plataforma que analisa chamadas com IA e cobra por consumo. Em tudo isso, os mesmos princípios se repetem: filas, idempotência, isolamento por tenant e falhas tratadas como parte do desenho.
             </p>
             <span className="languages mono">{profile.languages}</span>
           </div>
@@ -187,10 +174,14 @@ export default function Home() {
             title="Uma base para ir além"
           />
           <article className="education-card">
-            <div className="university-mark" aria-hidden="true">
-              <span>UNI</span>
-              <span>MONTES</span>
-              <Icon name="arrow" size={25} />
+            <div className="university-mark">
+              <Image
+                src={profile.education.logo}
+                alt={`Logo da ${profile.education.institution}`}
+                width={690}
+                height={443}
+                className="university-logo"
+              />
             </div>
             <div className="education-copy">
               <div className="education-meta">
@@ -287,12 +278,12 @@ export default function Home() {
                 GitHub
                 <Icon name="arrow" />
               </a>
-              <a href={profile.cv.url} download={profile.cv.filename}>
+              {/* <a href={profile.cv.url} download={profile.cv.filename}>
                 <Icon name="file" />
                 Baixar currículo
                 <Icon name="down" />
-              </a>
-              <span className="mono">MONTES CLAROS, MG · BRASIL</span>
+              </a> */}
+              <span className="mono">MG · BRASIL</span>
             </div>
           </div>
         </section>
@@ -304,7 +295,6 @@ export default function Home() {
           </span>
           <span>Igor Albuquerque</span>
         </a>
-        <span>Feito com intenção. Do desenho ao código.</span>
         <a className="mono" href="#inicio">
           VOLTAR AO TOPO <Icon name="arrow" size={15} />
         </a>
