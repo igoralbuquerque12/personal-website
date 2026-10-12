@@ -15,7 +15,7 @@ export const profile = {
   introduction:
     "Construo backends, conecto serviços e transformo regras de negócio complexas em produtos que funcionam no dia a dia. Do primeiro desenho à operação em produção.",
   about:
-    "Meu trabalho começa entendendo o problema. Depois vêm as decisões: como modelar os dados, onde colocar uma fila, como lidar com uma falha e o que monitorar. Atuo de ponta a ponta, com foco em backend e arquitetura — e com a visão de produto de quem também constrói a interface e conversa com o cliente.",
+    "Prazer, me chamo Igor. Desenvolvo software para resolver problemas, os dos outros e os meus: boa parte do que construí nasceu de uma necessidade minha. Atuo de ponta a ponta, mas meu foco é backend. Gosto de arquitetar soluções, transformar regras de negócio complexas em código e organizar fluxos assíncronos e de dados.",
   languages: "Português nativo · Inglês avançado",
   education: {
     degree: "Bacharelado em Sistemas de Informação",
@@ -24,7 +24,8 @@ export const profile = {
     period: "2023 — 2026",
     status: "Em conclusão · previsão: dez. 2026",
     description:
-      "Uma base em computação que levo para a prática: engenharia de software, modelagem de dados, otimização e pesquisa aplicada em inteligência artificial.",
+      "",
+    logo: "/images/education/unimontes.png",
   },
 };
 
@@ -32,21 +33,22 @@ export const experiences: Experience[] = [
   {
     id: "nocorp",
     company: "Nocorp",
-    role: "Engenheiro de Software Júnior",
+    role: "Engenheiro de Software Júnior & AI Tech Lead",
     period: "JUN 2025 — ATUAL",
     current: true,
     description:
-      "Construção de um ecossistema de vendas: CRM, integrações, agentes de IA e serviços orientados a eventos. Participo do levantamento de requisitos às decisões de arquitetura e à operação em produção.",
+      "Atuo no Pillot, plataforma multi-tenant de gestão de consórcios construída em microsserviços. Entrei desenvolvendo com a equipe a base da plataforma e, desde maio de 2026, lidero a frente de IA como tech lead.",
     highlights: [
-      "CRM multi-tenant utilizado por 5 concessionárias e cerca de 100 vendedores.",
-      "Kafka, retries e idempotência no processamento diário de vendas e comissões.",
-      "Agente comercial com RAG e WhatsApp, acompanhamento via WebSockets e observabilidade com Grafana, Prometheus e Loki.",
+      "Backend do agente de vendas: comportamento configurável por painel e follow-ups guiados pelos dados de vendas e pagamentos.",
+      "Microsserviços de ELT e sincronização de grandes volumes de vendas em segundo plano.",
+      "Com a equipe, o serviço principal: vendas, comissões, pagamentos, etapas de borderô e integração com o omnichannel.",
+      "Implantação em AWS (ECS, ALB) com Docker e proxies reversos.",
     ],
-    stack: ["NestJS", "Kafka", "PostgreSQL", "AWS", "Docker"],
+    stack: ["AWS", "Docker"],
   },
   {
     id: "freelance",
-    company: "Projetos independentes",
+    company: "Projetos Freelance",
     role: "Engenheiro de Software Full-Stack",
     period: "MAI—OUT 2025 · MAI—AGO 2026",
     description:
@@ -88,7 +90,7 @@ export const experiences: Experience[] = [
 export const expertise = [
   {
     title: "Backend & arquitetura",
-    text: "Node.js, NestJS, Python, Django, FastAPI, tRPC, DDD e sistemas multi-tenant.",
+    text: "Node.js, NestJS, Message Queue, tRPC, DDD e sistemas multi-tenant.",
   },
   {
     title: "Dados & eventos",
