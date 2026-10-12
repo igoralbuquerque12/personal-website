@@ -40,96 +40,6 @@ function entry(item: CatalogEntry): Project {
 
 export const catalogProjects: Project[] = [
   entry({
-    id: "crm-nocorp",
-    name: "CRM de vendas & comissões",
-    category: "Backend & Cloud",
-    context: "Nocorp · Produto privado",
-    rank: 8,
-    summary:
-      "Gestão de finanças, metas e comissões para uma operação com múltiplas concessionárias.",
-    stack: ["NestJS", "PostgreSQL", "Prisma", "React", "Supabase"],
-    role: "Construção do CRM e das regras de negócio no contexto da equipe Nocorp.",
-    problem:
-      "Consolidar operações de unidades diferentes, com comissionamento, metas e acompanhamento de atendimento no mesmo sistema.",
-    solution:
-      "Um CRM multi-tenant reúne os dados operacionais e traduz as regras comerciais em fluxos, projeções e dashboards de auditoria.",
-    highlights: [
-      {
-        title: "Regras comerciais no centro",
-        description:
-          "Modelagem de consórcios, comissões, planos de ação e indicadores financeiros.",
-      },
-      {
-        title: "Visibilidade sobre a operação",
-        description:
-          "Painéis de metas e SLAs permitem acompanhar atendimento humano e por IA.",
-      },
-    ],
-    outcomes: [
-      "Utilizado por 5 concessionárias e aproximadamente 100 vendedores, conforme a documentação profissional.",
-    ],
-  }),
-  entry({
-    id: "agente-comercial",
-    name: "Agente comercial com RAG",
-    category: "IA & produtos",
-    context: "Nocorp · Produto privado",
-    rank: 9,
-    summary:
-      "Atendimento comercial por WhatsApp com contexto de negócio e acompanhamento em tempo real.",
-    stack: ["Node.js", "LLMs", "RAG", "WhatsApp API", "WebSockets", "React"],
-    role: "Desenvolvimento do agente, das integrações e da interface de acompanhamento na Nocorp.",
-    problem:
-      "Atender leads com contexto, encaminhar ações comerciais e permitir que a equipe acompanhe a atuação da IA.",
-    solution:
-      "Webhooks recebem as interações do WhatsApp; o agente consulta contexto via RAG e conduz o atendimento, enquanto WebSockets atualizam o painel dos vendedores.",
-    highlights: [
-      {
-        title: "Execuções coordenadas",
-        description:
-          "Controle de claimed runs para evitar que a mesma execução de IA seja assumida simultaneamente.",
-      },
-      {
-        title: "IA dentro da operação",
-        description:
-          "O atendimento participa do funil de vendas e permanece visível para a equipe comercial.",
-      },
-    ],
-    outcomes: [
-      "Atendimento a milhares de leads e conversões autônomas relatadas no currículo.",
-    ],
-  }),
-  entry({
-    id: "ingestao-nocorp",
-    name: "Pipeline de dados comerciais",
-    category: "Backend & Cloud",
-    context: "Nocorp · Infraestrutura privada",
-    rank: 10,
-    summary:
-      "Integrações e robôs que abastecem a operação comercial com leads, vendas e comissões.",
-    stack: ["Node.js", "Kafka", "Puppeteer", "Playwright", "Docker", "Grafana"],
-    role: "Desenvolvimento dos serviços de ingestão e participação na arquitetura orientada a eventos.",
-    problem:
-      "Trazer dados de portais e APIs externas para o CRM, lidando com falhas parciais e reprocessamento.",
-    solution:
-      "Serviços conteinerizados coletam dados e os integram ao ecossistema por mensageria. Retentativas e regras de idempotência reduzem o impacto de interrupções e duplicidades.",
-    highlights: [
-      {
-        title: "Processamento desacoplado",
-        description:
-          "Kafka conecta serviços de ingestão e negócio, permitindo tratar falhas por etapa.",
-      },
-      {
-        title: "Operação observável",
-        description:
-          "Logs e métricas com Grafana, Prometheus e Loki ajudam a acompanhar a saúde dos serviços.",
-      },
-    ],
-    outcomes: [
-      "Rotinas para centenas de leads e milhares de registros de vendas diariamente, segundo o relato profissional.",
-    ],
-  }),
-  entry({
     id: "mcp-vibe-git",
     name: "MCP vibe-git",
     category: "Dev tools",
@@ -184,34 +94,6 @@ export const catalogProjects: Project[] = [
     ],
     outcomes: [
       "Backend com gestão de eventos e tratamento explícito de condições de corrida.",
-    ],
-  }),
-  entry({
-    id: "transaction-api",
-    name: "Transaction API",
-    category: "Backend & Cloud",
-    context: "Estudo · Desafio técnico",
-    rank: 13,
-    summary:
-      "Uma API de transações construída para exercitar testes, carga, logs e observabilidade.",
-    stack: ["JavaScript", "Jest", "Artillery", "Winston"],
-    role: "Implementação de um projeto de estudo baseado em desafio técnico do Itaú.",
-    problem:
-      "Ir além dos endpoints e investigar como uma API pode ser validada e observada.",
-    solution:
-      "Combinei testes unitários, experimentos de carga e logs estruturados no desenvolvimento da API.",
-    highlights: [
-      {
-        title: "Qualidade como parte da entrega",
-        description:
-          "Jest verifica comportamento, Artillery exercita carga e Winston organiza os registros da aplicação.",
-      },
-    ],
-    outcomes: [
-      "Projeto de estudo concluído. Não há métricas de benchmark anexadas para publicar resultados de desempenho.",
-    ],
-    sources: [
-      "app/data/otherProjects.ts (inventário anterior, preservado em knowledge-base/SOURCES.md)",
     ],
   }),
   entry({
@@ -338,12 +220,12 @@ export const catalogProjects: Project[] = [
   }),
   entry({
     id: "ecommerce",
-    name: "E-commerce internacional",
+    name: "Experiência Internacional",
     category: "Pesquisa & web",
     context: "Nocorp · Projeto para cliente",
     rank: 18,
     summary:
-      "Desenvolvimento de uma loja online com integração à plataforma Wix e alinhamento com cliente estrangeiro.",
+      "Desenvolvimento de uma loja online para um cliente estrangeiro. As funcionalidades incluiam desde a criação de páginas de vendas, até gerenciamento e controle de pedidos e emissão de notas fiscais com impostos mexicanos.",
     stack: ["React", "JavaScript", "Wix APIs"],
     role: "Desenvolvimento de ponta a ponta e participação em reuniões de requisitos.",
     problem:

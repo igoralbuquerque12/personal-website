@@ -13,7 +13,7 @@ export const ecosystem = {
       caption: {
         text: "minha API de e-mails assíncrona e multi-tenant na AWS.",
         highlight:
-          "Permite enviar e-mails singulares ou disparos e gerenciar 2FA. Permito a utilização de diversos provedores e controle via api pública.",
+          "Permite enviar e-mails singulares ou disparos, além de gerenciar 2FA. Atende diversos provedores dada arquitetura adapter.",
       },
       desktop: { x: 0.7, y: 0.1, r: -2.5 },
       mobile: { x: 0.62, y: 0.09, r: -2 },
@@ -24,7 +24,7 @@ export const ecosystem = {
       subtitle: "Idiomas em chat com IA",
       caption: {
         text: "prática de idiomas em chat, com correções por IA.",
-        highlight: "Versionado pelo vibe-git.",
+        highlight: "Websocket, criptografia de mensagens e IA integrada.",
       },
       desktop: { x: 0.13, y: 0.42, r: 2 },
       mobile: { x: 0.24, y: 0.25, r: 2 },
@@ -34,8 +34,8 @@ export const ecosystem = {
       role: "product",
       subtitle: "Chamadas viram indicadores",
       caption: {
-        text: "chamadas viram indicadores de atendimento com IA.",
-        highlight: "Versionado pelo vibe-git.",
+        text: "controle de chamadas e gestão de call-center.",
+        highlight: "Ouvir chamadas longas? Não, uma IA transcreve e metrifíca o desempenho.",
       },
       desktop: { x: 0.87, y: 0.34, r: -1.5 },
       mobile: { x: 0.76, y: 0.31, r: -1.5 },
@@ -45,9 +45,9 @@ export const ecosystem = {
       role: "product",
       subtitle: "Consulta vira anamnese",
       caption: {
-        text: "a conversa da consulta vira uma anamnese estruturada.",
+        text: "gestão de consulta, paciente e anamnese com automações pra facilitar o processo do médico.",
         highlight:
-          "Usa o MailWorks, avisa o Jarvis quando falha e é versionado pelo vibe-git.",
+          "Desde o preenchimento da anamnese só pelo diálogo com o paciente, até análise de risco cirurgico e geração de sugestões da conduta, diagnóstico e prescrição.",
       },
       desktop: { x: 0.43, y: 0.5, r: 1.5 },
       mobile: { x: 0.3, y: 0.49, r: 1.5 },
@@ -57,9 +57,9 @@ export const ecosystem = {
       role: "product",
       subtitle: "Gestor de cobranças",
       caption: {
-        text: "cobranças e integração com sistema legado via RPA.",
+        text: "gestão de milhares de cobranças de alunos de escolas de curso técnico.",
         highlight:
-          "Usa o MailWorks, avisa o Jarvis quando a coleta quebra e é versionado pelo vibe-git.",
+          "Cobranças tratadas de maneira idempotente e com mensageria assíncrona.",
       },
       desktop: { x: 0.8, y: 0.64, r: -2 },
       mobile: { x: 0.74, y: 0.58, r: -2 },
@@ -70,7 +70,7 @@ export const ecosystem = {
       subtitle: "Versiona tudo via CLI",
       caption: {
         text: "CLI no npm que transforma o diff em commits, branches e PRs.",
-        highlight: "É por ele que todos os outros projetos são versionados.",
+        highlight: "É por ele que todos meus projetos são versionados.",
       },
       desktop: { x: 0.17, y: 0.84, r: -1.5 },
       mobile: { x: 0.27, y: 0.77, r: -1.5 },
