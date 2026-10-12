@@ -312,12 +312,8 @@
     padding-bottom: 20px;
   }
   .university-mark {
-    width: 170px;
-    padding: 28px 22px;
-    font-size: 30px;
-  }
-  .university-mark > span:nth-child(2) {
-    font-size: 19px;
+    width: 180px;
+    padding: 24px 18px;
   }
   .education-copy {
     padding: 25px;
@@ -720,16 +716,19 @@
   }
   .university-mark {
     width: 100%;
-    padding: 25px;
-    min-height: 130px;
-    flex-direction: row;
+    padding: 24px;
+    min-height: 110px;
+    display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 4px;
-    font-size: 30px;
+    justify-content: center;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    background: #ffffff;
   }
-  .university-mark > span:nth-child(2) {
-    font-size: 30px;
+  .university-logo {
+    max-width: 200px;
+    max-height: 90px;
+    margin: 0 auto;
   }
   .education-copy {
     padding: 24px;
