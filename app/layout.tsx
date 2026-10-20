@@ -1,28 +1,29 @@
 import type { Metadata } from "next";
-import { Syne, DM_Mono, DM_Sans } from "next/font/google";
+import { League_Gothic, DM_Mono, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./portfolio.css";
 import "./responsive.css";
 import "./ecosystem.css";
 
-const syne = Syne({
+// Display: tipo de madeira condensado dos cartazes de rua. Corpo: grotesca de jornal.
+const leagueGothic = League_Gothic({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-syne",
+  variable: "--font-league",
   display: "swap",
 });
 
+// Só para blocos de código; rótulos e dados usam a grotesca.
 const dmMono = DM_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["400", "500"],
   variable: "--font-dm-mono",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const schibsted = Schibsted_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-dm-sans",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-schibsted",
   display: "swap",
 });
 
@@ -66,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${syne.variable} ${dmMono.variable} ${dmSans.variable}`}
+      className={`${leagueGothic.variable} ${dmMono.variable} ${schibsted.variable}`}
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>{children}</body>
