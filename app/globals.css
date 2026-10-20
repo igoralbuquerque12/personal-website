@@ -1,34 +1,48 @@
+/* Pôster de rua: amarelo-táxi, papel, tinta preta. O vermelho-laranja é só da ação. */
 :root {
-  --paper: #f8f9f5;
+  --taxi: #f7c600;
+  --taxi-soft: #fff2b0;
+  --paper: #fbfbf6;
   --white: #fff;
-  --ink: #20251f;
-  --muted: #687064;
-  --line: #dfe3d9;
-  --lime: #c5f366;
-  --green: #426128;
-  --font-body: var(--font-dm-sans), Arial, sans-serif;
-  --font-heading: var(--font-syne), Arial, sans-serif;
+  --ink: #0d0d0d;
+  --ink-soft: #3a3a34;
+  --signal: #d4380f;
+  --line: var(--ink);
+  --focus: var(--ink);
+  --rule: 3px;
+  --gutter: 48px;
+  --font-body: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif;
+  --font-heading: var(--font-league), "Arial Narrow", Impact, sans-serif;
   --font-mono: var(--font-dm-mono), monospace;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Escala de display: cresce com a tela, nunca passa de 9rem. */
+  --display-xl: clamp(4.5rem, 12.5vw, 9rem);
+  --display-l: clamp(3.5rem, 8.5vw, 7rem);
+  --display-m: clamp(2.5rem, 4.5vw, 4rem);
+  --display-s: clamp(2rem, 2.8vw, 2.5rem);
 }
 * {
   box-sizing: border-box;
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  scroll-padding-top: 96px;
+  scrollbar-color: var(--ink) var(--paper);
 }
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 button,
 input {
   font: inherit;
+  caret-color: var(--signal);
 }
 button,
 a {
@@ -42,13 +56,16 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 2px;
 }
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
+summary:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #5e8130;
-  outline-offset: 5px;
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
 }
 h1,
 h2,
@@ -61,99 +78,117 @@ h1,
 h2,
 h3,
 h4 {
-  line-height: 1.17;
+  line-height: 1.1;
+  text-wrap: balance;
 }
+/* Tipo de madeira: caixa alta condensada. */
 h1,
 h2 {
   font-family: var(--font-heading);
-  font-weight: 600;
-  letter-spacing: -0.055em;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.9;
 }
 h3,
 h4 {
-  letter-spacing: -0.035em;
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 svg {
   flex-shrink: 0;
 }
 ::selection {
-  background: var(--lime);
+  background: var(--ink);
+  color: var(--taxi);
+}
+.on-ink ::selection,
+.contact-section ::selection,
+.site-header ::selection {
+  background: var(--taxi);
   color: var(--ink);
 }
 .section-shell {
-  width: min(1200px, calc(100% - 112px));
+  width: min(1240px, calc(100% - 2 * var(--gutter)));
   margin-inline: auto;
 }
 .section-space {
-  padding-block: 100px;
+  padding-block: 112px;
 }
+/* Rótulos e dados: grotesca em caixa alta, sem fantasia de mono. */
 .mono,
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  font-weight: 400;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.3;
 }
 .eyebrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  gap: 0.6em;
+  padding: 0.4em 0.8em;
+  background: var(--ink);
+  color: var(--taxi);
 }
 .eyebrow > span:first-child:not(.status-dot) {
-  color: #666e5f;
+  color: inherit;
 }
 .status-dot {
   display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #709747;
-  box-shadow: 0 0 0 4px #70974713;
+  width: 10px;
+  height: 10px;
+  background: var(--taxi);
   flex-shrink: 0;
 }
 .accent-dot {
-  color: #72934c;
+  color: inherit;
 }
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  min-height: 48px;
-  padding: 12px 22px;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 5px;
+  gap: 16px;
+  min-height: 52px;
+  padding: 12px 24px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border: var(--rule) solid var(--ink);
+  border-radius: 0;
   transition:
+    transform 0.25s var(--ease-out),
     background 0.2s,
-    transform 0.2s;
+    color 0.2s;
 }
 .button:hover {
-  transform: translateY(-2px);
+  transform: rotate(-1.5deg) translateY(-2px);
 }
 .button-dark {
   background: var(--ink);
-  color: white;
+  color: var(--taxi);
 }
 .button-dark:hover {
-  background: #37452e;
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--white);
 }
 .button-outline {
-  border: 1px solid #cdd2c6;
   background: transparent;
 }
-.button-outline:hover {
-  background: #eff2e9;
-}
 .button-lime {
-  background: var(--lime);
+  background: var(--taxi);
   color: var(--ink);
+  border-color: var(--taxi);
 }
 .button-lime:hover {
-  background: #d7ff8e;
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--white);
 }
 .tags {
   display: flex;
@@ -161,22 +196,23 @@ svg {
   gap: 6px;
 }
 .tags > span {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  line-height: 1.6;
-  padding: 4px 8px;
-  background: #eef1e9;
-  border: 1px solid #e3e7dc;
-  border-radius: 4px;
-  color: #59604f;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 3px 9px;
+  background: transparent;
+  border: 2px solid currentColor;
+  border-radius: 0;
 }
 .skip-link {
   position: fixed;
   top: -80px;
   left: 20px;
   z-index: 1000;
-  padding: 15px;
-  background: var(--lime);
+  padding: 15px 20px;
+  background: var(--taxi);
+  border: var(--rule) solid var(--ink);
+  font-weight: 700;
 }
 .skip-link:focus {
   top: 12px;
@@ -198,11 +234,13 @@ svg {
   align-items: center;
   background: none;
   padding: 8px 0;
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
 }
 .text-button:hover {
-  color: var(--green);
+  background: var(--taxi);
 }
 @media (prefers-reduced-motion: reduce) {
   html {
