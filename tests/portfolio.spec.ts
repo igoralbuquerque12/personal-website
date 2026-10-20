@@ -177,6 +177,8 @@ test("mapa de abertura: arrastar move o card sem abrir o modal", async ({
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   const node = page.locator('.eco-map [data-node="care-copilot"]');
+  // O mapa começa abaixo da primeira tela: o mouse só alcança o card visível.
+  await node.scrollIntoViewIfNeeded();
   const before = (await node.boundingBox())!;
   await page.mouse.move(before.x + 20, before.y + 20);
   await page.mouse.down();
